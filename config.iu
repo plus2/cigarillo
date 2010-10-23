@@ -1,0 +1,13 @@
+$LOAD_PATH << ::File.expand_path('../lib', __FILE__)
+
+require 'environment'
+require 'cigarillo'
+
+use Igor::Logger, $stderr
+use Igor::PayloadParsers::JSON
+use Cigarillo::Integration::TimeNazi
+use Cigarillo::Integration::Checkout
+use Cigarillo::Integration::CiSetup
+run Cigarillo::Integration::Runner.new
+
+# vim: ft=ruby

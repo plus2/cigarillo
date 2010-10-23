@@ -1,0 +1,51 @@
+PATH
+  remote: ~/dev/plus2/angry_shell
+  specs:
+    angry_shell (0.0.1)
+
+PATH
+  remote: ~/dev/plus2/igor
+  specs:
+    igor (0.0.1)
+      amqp (~> 0.6.7)
+      angry_hash (~> 0.3.2)
+      lachie-tapp (~> 1.1.0)
+      thor (~> 0.14.3)
+      yajl-ruby (~> 0.7.8)
+
+PATH
+  remote: ~/dev/ruby/peace_love
+  specs:
+    peace_love (0.2.1)
+      angry_hash (~> 0.3.2)
+      mongo (~> 1.1.0)
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    amqp (0.6.7)
+      eventmachine (>= 0.12.4)
+    angry_hash (0.3.2)
+    bson (1.1.1)
+    eventmachine (0.12.10)
+    exemplor (3000.3.0)
+    lachie-tapp (1.1.0)
+    mongo (1.1.1)
+      bson (>= 1.1.1)
+    rack (1.2.1)
+    sinatra (1.0)
+      rack (>= 1.0)
+    thor (0.14.3)
+    yajl-ruby (0.7.8)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  angry_shell (~> 0.0.0)!
+  exemplor
+  igor!
+  lachie-tapp
+  peace_love (~> 0.2.0)!
+  sinatra
+  yajl-ruby

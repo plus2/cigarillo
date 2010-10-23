@@ -1,0 +1,5 @@
+queues:
+  - yoohoo
+
+response_queue:
+  - yoohoo-response
