@@ -12,6 +12,7 @@ module Cigarillo
   module Utils
     autoload :Repo,     "cigarillo/utils/repo"
     autoload :Progress, "cigarillo/utils/progress"
+    autoload :LineProgress, "cigarillo/utils/line_progress"
     autoload :Db,       "cigarillo/utils/db"
   end
 
