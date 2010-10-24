@@ -4,6 +4,7 @@ module Cigarillo
     autoload :Runner, "cigarillo/integration/runner"
     autoload :TimeNazi, "cigarillo/integration/time_nazi"
     autoload :CiSetup, "cigarillo/integration/ci_setup"
+    autoload :YmSetup, "cigarillo/integration/ym_setup"
   end
 
   module Utils
