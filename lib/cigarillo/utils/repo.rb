@@ -23,12 +23,11 @@ module Cigarillo
         else
           git("clone #{config.repo.url} #{repo}", :cwd => repos).run
         end
-
-        # git("reset --hard #{ref}").run
       end
 
       def checkout!
-        git("clone -s -b #{ref} #{repo} #{checkout}", :cwd => checkouts).run
+        git("clone -s -n #{repo} #{checkout}").run
+        git("reset --hard #{ref_sha}", :cwd => checkout).run
       end
 
       def submodules!
@@ -94,7 +93,7 @@ module Cigarillo
       def git(*cmd)
         opts = Hash === cmd.last ? cmd.pop : {}
 
-        sh("git #{cmd}", opts.merge(:cwd => (opts[:cwd] || repo)))
+        sh("git #{cmd}".tapp, opts.merge(:cwd => (opts[:cwd] || repo)))
       end
     end
   end
