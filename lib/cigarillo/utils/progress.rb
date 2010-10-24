@@ -11,14 +11,22 @@ module Cigarillo
       def task(tag,msg='',extra={},&blk)
         start_time = Time.now
         @log.puts "starting #{tag} #{msg}"
-        @queue.publish( Yajl::Encoder.encode( extra.update(:status => 'started', :tag => tag, :msg => msg) ) )
+        publish( extra.update(:status => 'started', :tag => tag, :msg => msg) )
         if block_given?
           yield.tap {|response|
             duration = Time.now-start_time
             @log.puts "finished #{tag} #{msg} in #{duration}s"
-            @queue.publish( Yajl::Encoder.encode( extra.update(:status => 'finished', :tag => tag, :msg => msg, :duration => duration) ) )
+            publish( extra.update(:status => 'finished', :tag => tag, :msg => msg, :duration => duration) )
           }
         end
+      end
+
+      def info(tag,msg)
+         publish( :tag => tag, :msg => msg ) )
+      end
+
+      def publish(data)
+        @queue.publish( Yajl::Encoder.encode(data) )
       end
     end
   end
