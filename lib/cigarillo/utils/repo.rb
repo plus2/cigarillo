@@ -19,7 +19,7 @@ module Cigarillo
 
       def sync!
         if repo.exist?
-          git("fetch #{config.repo.url}").run
+          git("fetch").run
         else
           git("clone #{config.repo.url} #{repo}", :cwd => repos).run
         end
