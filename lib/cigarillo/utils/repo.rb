@@ -38,14 +38,18 @@ module Cigarillo
       # refs
       def ref_sha
         @ref_sha ||= begin
-                       git("rev-parse #{ref}").to_s.tap {|sha|
-                         raise("sha not found for ref #{ref}") if sha == ''
+                       git("rev-parse #{remote_ref}").to_s.tap {|sha|
+                         raise("sha not found for ref #{remote_ref}") if sha == ''
                        }
                      end
       end
 
+      def remote_ref
+        @remote_ref ||= "origin/#{config.repo.ref}"
+      end
+
       def ref
-        @ref ||= "origin/#{config.repo.ref}"
+        @ref ||= config.repo.ref
       end
 
 
