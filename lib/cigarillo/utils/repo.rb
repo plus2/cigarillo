@@ -17,15 +17,16 @@ module Cigarillo
 
       def sync!
         if repo.exist?
-          # TODO XXX switch to non-bare repos
           git("fetch #{config.repo.url}").run
         else
-          git("clone --bare #{config.repo.url} #{repo}", :cwd => repos).run
+          git("clone #{config.repo.url} #{repo}", :cwd => repos).run
         end
+
+        # git("reset --hard #{ref}").run
       end
 
       def checkout!
-        git("clone -s -b #{ref_sha} #{repo} #{checkout.tapp(:checkout)}", :cwd => checkouts).run
+        git("clone -s -b #{ref} #{repo} #{checkout}", :cwd => checkouts).run
       end
 
       def submodules!
@@ -42,7 +43,7 @@ module Cigarillo
       end
 
       def ref
-        @ref ||= config.repo.ref
+        @ref ||= "origin/#{config.repo.ref}"
       end
 
 
@@ -73,7 +74,7 @@ module Cigarillo
 
       ### repos
       def repo
-        @repo ||= repos + "#{name}.git"
+        @repo ||= repos + name
       end
 
       def repos
