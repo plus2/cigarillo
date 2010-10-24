@@ -6,6 +6,7 @@ GEM
     angry_hash (0.3.2)
     angry_shell (0.0.1)
     bson (1.1.1)
+    bunny (0.6.0)
     eventmachine (0.12.10)
     exemplor (3000.3.0)
     igor (0.0.1)
@@ -31,6 +32,7 @@ PLATFORMS
 
 DEPENDENCIES
   angry_shell (~> 0.0.1)
+  bunny
   exemplor
   igor (~> 0.0.1)
   lachie-tapp

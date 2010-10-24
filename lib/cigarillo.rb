@@ -6,6 +6,7 @@ module Cigarillo
     autoload :CiSetup   , "cigarillo/integration/ci_setup"
     autoload :YmSetup   , "cigarillo/integration/ym_setup"
     autoload :GithubPing, "cigarillo/integration/github_ping"
+    autoload :ProgressLog, "cigarillo/integration/progress_log"
   end
 
   module Utils

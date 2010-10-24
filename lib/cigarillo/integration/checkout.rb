@@ -11,9 +11,8 @@ module Cigarillo
       end
 
       def call(env)
-        @progress_queue ||= MQ.queue('yoohoo-progress')
-        env['progress'] = progress ||= Cigarillo::Utils::Progress.new(@progress_queue)
         env['repo']     = repo     ||= Cigarillo::Utils::Repo.new(env['igor.payload'])
+        progress = env['progress']
 
         progress.task :integration do
           progress.task :git do
