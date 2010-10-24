@@ -2,5 +2,5 @@ require 'yaml'
 require 'pathname'
 
 act :on => 'yesmaster/prepare_app' do
-  file Pathname(node.current_path)+'config.yml', :string => node.cigarillo
+  file Pathname(node.current_path)+'config.yml', :string => node.cigarillo.to_yaml
 end
