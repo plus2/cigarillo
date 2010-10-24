@@ -7,6 +7,7 @@ use Igor::Logger, $stderr
 use Igor::PayloadParsers::JSON
 use Cigarillo::Integration::TimeNazi
 use Cigarillo::Integration::Checkout
+use Cigarillo::Integration::YmSetup
 use Cigarillo::Integration::CiSetup
 run Cigarillo::Integration::Runner.new
 

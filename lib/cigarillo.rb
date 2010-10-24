@@ -7,9 +7,9 @@ module Cigarillo
   end
 
   module Utils
-    autoload :Repo, "cigarillo/utils/repo"
+    autoload :Repo,     "cigarillo/utils/repo"
     autoload :Progress, "cigarillo/utils/progress"
-    autoload :Db, "cigarillo/utils/db"
+    autoload :Db,       "cigarillo/utils/db"
   end
 
   def self.root

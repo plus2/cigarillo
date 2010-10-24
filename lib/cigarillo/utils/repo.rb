@@ -17,6 +17,7 @@ module Cigarillo
 
       def sync!
         if repo.exist?
+          # TODO XXX switch to non-bare repos
           git("fetch #{config.repo.url}").run
         else
           git("clone --bare #{config.repo.url} #{repo}", :cwd => repos).run

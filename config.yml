@@ -3,3 +3,8 @@ queues:
 
 response_queue:
   - yoohoo-response
+
+env:
+  'cigarillo.mysql':
+    creator_username: root
+    creator_password: 

@@ -15,7 +15,7 @@ module Cigarillo
 
         env['ci'] = YAML.load(ci_yml.read).merge(:path => repo.checkout, :name => repo.name)
 
-        Cigarillo::Utils::Db.new(env['ci']).prepare!
+        Cigarillo::Utils::Db.new(env['ci'],env).prepare!
 
         @igor.call(env)
       end
