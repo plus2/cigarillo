@@ -11,8 +11,8 @@ Bunny.run(:logging => true) do |b|
   payload = {
     :name => 'compliance-hound',
     :repo => {
+      :url => 'git@github.com:plustwo/compliance-hound.git',
       :url => '/Users/lachie/dev/plus2/compliance-hound',
-      :ref => '2271eaf1cc432d654a90320c71d1c8f4846b25dc',
       :ref => 'production',
     },
   }
