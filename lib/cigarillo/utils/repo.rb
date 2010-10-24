@@ -9,6 +9,8 @@ module Cigarillo
 
       def initialize(config)
         @config = AngryHash[ config ]
+
+        # XXX verify name, url and ref
       end
 
       def name
@@ -74,7 +76,10 @@ module Cigarillo
 
       ### repos
       def repo
-        @repo ||= repos + name
+        @repo ||= begin
+                    source = config.repo.url.gsub(/[^A-Za-z]+/,'-')
+                    repos + "#{name}-#{source}"
+                  end
       end
 
       def repos
