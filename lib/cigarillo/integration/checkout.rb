@@ -21,7 +21,7 @@ module Cigarillo
             repo.checkout!
             repo.submodules!
 
-            sh("bundle install", :cwd => repo.checkout).run if (repo.checkout+'Gemfile').exist?
+            sh("bundle install --path=#{Cigarillo.workbench+'bundle'}", :cwd => repo.checkout).run if (repo.checkout+'Gemfile').exist?
           end
 
           @igor.call(env)
