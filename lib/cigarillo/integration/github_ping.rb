@@ -13,7 +13,7 @@ module Cigarillo
 				dot_ssh    = Pathname("~/.ssh").expand_path
 				id_dsa     = dot_ssh+'id_dsa'
 
-				unless id_dsa.exist? && github_token = env['cigarillo.github_api_token']
+				if !id_dsa.exist? && (github_token = env['cigarillo.github_api_token'])
 					id_dsa_pub = dot_ssh+'id_dsa.pub'
 
 					# Generate a key.
