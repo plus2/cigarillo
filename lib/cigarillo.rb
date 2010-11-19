@@ -22,6 +22,10 @@ module Cigarillo
     autoload :Db,       "cigarillo/utils/db"
   end
 
+  module Ui
+    autoload :App, "cigarillo/ui/app"
+  end
+
   def self.root
     @root ||= Pathname('../..').expand_path(__FILE__)
   end
