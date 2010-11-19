@@ -24,8 +24,13 @@ module Cigarillo
       end
 
       def call(env)
-        # set hard timeout on execution
-        @igor.call(env)
+        # XXX set hard timeout on execution
+
+        begin
+          @igor.call(env)
+        rescue Object
+          [500, {:error => "a crashing error occurred: [#{$!.class}] #{$!}", :build_id => env['cigarillo.build_id']}]
+        end
       end
     end
   end
