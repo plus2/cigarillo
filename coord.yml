@@ -1,0 +1,6 @@
+queues:
+  - cigarillo-coord
+
+response_exchange:
+  name: cigarillo-builds
+  kind: direct

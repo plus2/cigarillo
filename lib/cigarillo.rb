@@ -9,6 +9,12 @@ module Cigarillo
     autoload :ProgressLog, "cigarillo/integration/progress_log"
   end
 
+  module Coordinator
+    autoload :Igor, "cigarillo/coordinator/igor"
+    autoload :Repo, "cigarillo/coordinator/repo"
+    autoload :Build, "cigarillo/coordinator/build"
+  end
+
   module Utils
     autoload :Repo,     "cigarillo/utils/repo"
     autoload :Progress, "cigarillo/utils/progress"
