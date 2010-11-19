@@ -15,7 +15,11 @@ module Cigarillo
 
         env['ci'] = YAML.load(ci_yml.read).merge(:path => repo.checkout, :name => repo.name)
 
-        Cigarillo::Utils::Db.new(env['ci'],env).prepare!
+        begin
+          Cigarillo::Utils::Db.new(env['ci'],env).prepare!
+        rescue
+          return [500, {:msg => "ci.yml was invalid (#{$!})"}]
+        end
 
         @igor.call(env)
       end
