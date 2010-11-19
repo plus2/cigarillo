@@ -12,8 +12,12 @@ module Cigarillo
             next :env => environment, :result => nil
           end
 
-          # XXX repo.checkout should be more generic, perhaps... like 'runner.cwd'
-          cmd = {:cmd => options['ci_command'], :cwd => repo.checkout, :stream => true, :environment => {'RAILS_ENV' => environment, 'RACK_ENV' => environment}}
+          cmd = {
+            :cmd => "bundle exec #{options['build_command']}",
+            :cwd => env['runner.cwd'],
+            :stream => true,
+            :environment => {'RAILS_ENV' => environment, 'RACK_ENV' => environment}
+          }
 
           result = AngryShell::Shell.new.popen4(cmd) do |cid,ipc|
             readers = [ipc.stdout, ipc.stderr]
