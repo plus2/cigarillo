@@ -8,13 +8,14 @@ module Cigarillo
 			end
 
 			def call(env)
-        @progress_queue ||= begin
+        env['cigarillo.build_id'] = build_id = env['igor.payload']['build_id']
+        @progress_exchange ||= begin
 															cfg = env['cigarillo-progress']
 															b = Bunny.new(cfg['amqp'])
 															b.start
-															b.queue(cfg['queue'])
+															b.exchange(*cfg['exchange'])
 														end
-        env['progress'] = progress ||= Cigarillo::Utils::Progress.new(env['igor.errors'],@progress_queue)
+        env['progress'] = progress ||= Cigarillo::Utils::Progress.new(env['igor.errors'],@progress_exchange,build_id)
 
 				@igor.call(env)
 			end

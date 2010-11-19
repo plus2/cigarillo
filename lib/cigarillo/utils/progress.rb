@@ -3,15 +3,18 @@ require 'yajl'
 module Cigarillo
   module Utils
     class Progress
-      def initialize(log,queue)
-        @log = log
-        @queue = queue
+      def initialize(log,exchange,build_id)
+        @log      = log
+        @exchange = exchange
+        @build_id = build_id
       end
 
       def task(tag,msg='',extra={},&blk)
         start_time = Time.now
         @log.puts "starting #{tag} #{msg}"
+
         publish( extra.update(:status => 'started', :tag => tag, :msg => msg) )
+
         if block_given?
           yield.tap {|response|
             duration = Time.now-start_time
@@ -22,11 +25,11 @@ module Cigarillo
       end
 
       def info(tag,msg)
-         publish( :tag => tag, :msg => msg ) )
+         publish( :tag => tag, :msg => msg )
       end
 
       def publish(data)
-        @queue.publish( Yajl::Encoder.encode(data) )
+        @exchange.publish( Yajl::Encoder.encode(data.merge(:build_id => @build_id)) )
       end
     end
   end

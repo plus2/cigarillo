@@ -51,26 +51,15 @@ module Cigarillo
         @ref ||= config.repo.ref
       end
 
-
       ## paths
 
       ### checkouts
       def checkout
-        @checkout ||= begin
-                        index,latest = all_checkouts.last
-
-                        index ||= -1
-
-                        checkouts + "#{ref_sha}-#{index + 1}"
-                      end
+        @checkout ||= checkouts + config.build_id
       end
 
       def in_checkout(&blk)
         Dir.chdir(checkout,&blk)
-      end
-
-      def all_checkouts
-        Dir[checkouts + "#{ref_sha}-*"].map {|c| [c[/-(\d+)$/,1].to_i, c]}.sort_by {|c| c[0]}
       end
 
       def checkouts
