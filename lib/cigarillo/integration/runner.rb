@@ -6,10 +6,11 @@ module Cigarillo
     class Runner
       def call(env)
         progress = Cigarillo::Utils::LineProgress.new(env['progress'])
-        repo = env['repo']
 
-        env['ci']['environments'].each do |environment,options|
-          next unless options['ci_command']
+        builds = env['ci']['environments'].map do |environment,options|
+          unless options['build_command']
+            next :env => environment, :result => nil
+          end
 
           # XXX repo.checkout should be more generic, perhaps... like 'runner.cwd'
           cmd = {:cmd => options['ci_command'], :cwd => repo.checkout, :stream => true, :environment => {'RAILS_ENV' => environment, 'RACK_ENV' => environment}}
@@ -18,12 +19,12 @@ module Cigarillo
             readers = [ipc.stdout, ipc.stderr]
 
             until readers.empty?
-              ready = IO.select(readers, nil, nil, 1.0)
+              ready = IO.select(readers, nil, nil, 1.0) || next
 
               begin
                 ready[0].each {|fd| 
                   tag = fd == ipc.stdout ? :out : :err
-                  progress.add tag, fd.read_nonblock(512)
+                  progress.add tag, fd.read_nonblock(512) #.taputs
                 }
               rescue EOFError
                 readers.delete_if {|fd| fd.eof?}
@@ -31,8 +32,10 @@ module Cigarillo
             end
           end
 
-          [200, {:build => result.ok?}]
+          {:env => environment, :result => result.ok?}
         end
+
+        [200, {:builds => builds, :build_id => env['cigarillo.build_id']}]
       end
 
     end
