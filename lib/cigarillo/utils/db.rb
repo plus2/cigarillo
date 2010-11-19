@@ -31,6 +31,8 @@ module Cigarillo
             Mysql.new(environment,cfg,igorenv)
           when 'mongo','mongodb'
             Mongo.new(environment,cfg,igorenv)
+          else
+            raise "unknown preferred_adapter '#{cfg.preferred_adapter}'"
           end
         end
       end
