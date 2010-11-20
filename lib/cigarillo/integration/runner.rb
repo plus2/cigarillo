@@ -36,10 +36,14 @@ module Cigarillo
             end
           end
 
-          {:env => environment, :result => result.ok?}
+          {:env => environment, :success => result.ok?}
         end
 
-        [200, {:builds => builds, :build_id => env['cigarillo.build_id']}]
+        # send this message back on the response_exchange
+        Cigarillo::Utils::Result.new(env).finish! do |res|
+          res.details[:builds] = builds
+          res.status builds.all? {|res| res[:success]} ? 'ok' : 'fail'
+        end
       end
 
     end

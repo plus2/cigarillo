@@ -32,7 +32,10 @@ module Cigarillo
           puts "[#{$!.class}] #{$!}"
           $!.backtrace.each {|line| puts "  #{line}"}
 
-          [500, {:error => "a crashing error occurred: [#{$!.class}] #{$!}", :build_id => env['cigarillo.build_id']}]
+          Cigarillo::Utils::Result.new(env).finish! do |res|
+            res.status :error
+            res.message "a crashing error occurred: [#{$!.class}] #{$!}"
+          end
         end
       end
     end

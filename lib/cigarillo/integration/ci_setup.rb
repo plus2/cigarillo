@@ -18,7 +18,10 @@ module Cigarillo
         begin
           Cigarillo::Utils::Db.new(env['ci'],env).prepare!
         rescue
-          return [500, {:msg => "ci.yml was invalid (#{$!})"}]
+          return Cigarillo::Utils::Result.new(env).finish! do |res|
+            res.status :error
+            res.message "ci.yml was invalid (#{$!})"
+          end
         end
 
         @igor.call(env)
