@@ -29,6 +29,9 @@ module Cigarillo
         begin
           @igor.call(env)
         rescue Object
+          puts "[#{$!.class}] #{$!}"
+          $!.backtrace.each {|line| puts "  #{line}"}
+
           [500, {:error => "a crashing error occurred: [#{$!.class}] #{$!}", :build_id => env['cigarillo.build_id']}]
         end
       end
