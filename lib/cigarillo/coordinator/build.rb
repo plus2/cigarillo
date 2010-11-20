@@ -14,6 +14,10 @@ module Cigarillo
         collection.update({:_id => BSON::ObjectId(build_id)}, :$push => {:progress => progress})
       end
 
+      def self.record_result(build_id,result)
+        collection.update({:_id => BSON::ObjectId(build_id)}, :$set => {:result => result})
+      end
+
       def self.all
         collection.find()
       end

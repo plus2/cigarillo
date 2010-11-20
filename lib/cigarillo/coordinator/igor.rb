@@ -8,20 +8,21 @@ module Cigarillo
         env.tapp(:plist)
         payload = env['igor.payload']
 
-        case payload
-        when Array
-          # record results
-        when Hash
-          case kind = payload.delete('cigarillo-kind')
-          when 'progress'
-            handle_progress(payload)
-          else
-            return handle_ci(payload['repository'],payload) if payload['repository']
-          end
-
+        case kind = payload.delete('cigarillo-kind')
+        when 'result'
+          handle_result(payload)
+        when 'progress'
+          handle_progress(payload)
+        else
+          return handle_ci(payload['repository'],payload) if payload['repository']
         end
 
         nil # ensure that no feedback loops occur
+      end
+
+      def handle_result(payload)
+        build_id = payload.delete('build_id')
+        Build.record_result(build_id,payload) if build_id
       end
 
       def handle_progress(payload)
