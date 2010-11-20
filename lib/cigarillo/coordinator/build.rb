@@ -10,6 +10,10 @@ module Cigarillo
         collection.insert :created_at => Time.now.strftime("%Y-%m-%d %H:%M:%S"), :repo_id => repo._id, :sha => repo.after
       end
 
+      def self.add_progress(build_id,progress)
+        collection.update({:_id => BSON::ObjectId(build_id)}, :$push => {:progress => progress})
+      end
+
       def self.all
         collection.find()
       end
