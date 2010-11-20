@@ -1,3 +1,21 @@
 %ul
   %li build #{@build._id}
   %li built on #{@build.created_at}
+  %li
+    %h4 progress
+    %table
+      %thead
+        %tr
+          %th tag
+          %th message
+      %tbody
+        - @build.progress.each do |line|
+          %tr
+            %td 
+              =line.tag
+              = '/'+line.status if line.status
+            %td
+              %pre= line.msg
+              - if line.status == 'finished'
+                in #{line.duration}s
+
