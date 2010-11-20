@@ -20,6 +20,8 @@ module Cigarillo
           end
 
         end
+
+        nil # ensure that no feedback loops occur
       end
 
       def handle_progress(payload)
