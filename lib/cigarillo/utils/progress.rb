@@ -29,7 +29,7 @@ module Cigarillo
       end
 
       def publish(data)
-        @exchange.publish( Yajl::Encoder.encode(data.merge(:build_id => @build_id)) )
+        @exchange.publish( Yajl::Encoder.encode(data.merge('cigarillo-kind' => 'progress', :build_id => @build_id)) )
       end
     end
   end
