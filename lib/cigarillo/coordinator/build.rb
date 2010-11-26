@@ -29,6 +29,14 @@ module Cigarillo
       def self.find(id)
         collection.find(:_id => BSON::ObjectId(id)).first
       end
+
+      def succeeded?
+        result.status == 'ok'
+      end
+
+      def result
+        self['result']
+      end
     end
   end
 end

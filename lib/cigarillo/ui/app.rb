@@ -10,6 +10,23 @@ module Cigarillo
         haml :index
       end
 
+      get '/repos/:id' do |id|
+        @repo = Cigarillo::Coordinator::Repo.find(id)
+        haml :repo
+      end
+
+      get '/repos/:id/ci/:ref' do |id,ref|
+        @repo = Cigarillo::Coordinator::Repo.find(id)
+        @repo.add_ref_to_ci(ref)
+        redirect "/repos/#{@repo._id}"
+      end
+
+      get '/repos/:id/no-ci/:ref' do |id,ref|
+        @repo = Cigarillo::Coordinator::Repo.find(id)
+        @repo.del_ref_from_ci(ref)
+        redirect "/repos/#{@repo._id}"
+      end
+
       get '/repos/:id/force-build' do |id|
         @repo = Cigarillo::Coordinator::Repo.find(id)
         redirect '/'

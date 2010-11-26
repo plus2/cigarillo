@@ -58,6 +58,14 @@ module Cigarillo
       def private_repo_url
         "git@github.com:/#{owner}/#{name}.git"
       end
+
+      def add_ref_to_ci(ref)
+        __collection.update( {:_id=>_id}, :$set => {"ci.#{ref}" => true} )
+      end
+
+      def del_ref_from_ci(ref)
+        __collection.update( {:_id=>_id}, :$unset => {"ci.#{ref}" => 1} )
+      end
     end
   end
 end
