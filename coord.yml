@@ -1,6 +1,18 @@
 queues:
-  - cigarillo-coord
+  - name: cigarillo-coord
+    bindings:
+      - exchange: cigarillo-progress
+        kind: fanout
+      - exchange: cigarillo-results
+        kind: fanout
+      - exchange: plus2.git
+        kind: topic
+        key: push.#
 
-response_exchange:
-  name: cigarillo-builds
-  kind: direct
+response_exchanges:
+  - name: cigarillo-builds
+    kind: direct
+    default: true
+  - name: plus2.messages
+    kind: topic
+    key: campfire.General
