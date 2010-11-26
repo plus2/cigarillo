@@ -10,7 +10,10 @@ module Cigarillo
 
         ci_yml = (repo.checkout+'config/ci.yml')
         unless ci_yml.exist?
-          return [500, {:msg => "config/ci.yml missing from #{repo.name}"}]
+          return Cigarillo::Utils::Result.new(env).finish! do |res|
+            res.status :error
+            res.message "config/ci.yml missing from #{repo.name}"
+          end
         end
 
         env['ci'] = YAML.load(ci_yml.read).merge(:path => repo.checkout, :name => repo.name)
