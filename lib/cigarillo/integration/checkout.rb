@@ -11,6 +11,7 @@ module Cigarillo
       end
 
       def call(env)
+
         env['repo']     = repo     ||= Cigarillo::Utils::Repo.new(env['igor.payload'])
         progress = env['progress']
 
