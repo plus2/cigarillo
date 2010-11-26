@@ -5,43 +5,22 @@ module Cigarillo
       end
 
       def call(env)
-        env.tapp(:plist)
-        payload = env['igor.payload']
+        if repo = env['igor.payload']['repository']
 
-        case kind = payload.delete('cigarillo-kind')
-        when 'result'
-          handle_result(payload)
-        when 'progress'
-          handle_progress(payload)
-        else
-          return handle_ci(payload['repository'],payload) if payload['repository']
-        end
+          repo.tap {|r|
+            r['ref'] = env['igor.payload']['ref']
+          }
 
-        nil # ensure that no feedback loops occur
-      end
+          repo = Repo.record_repo(repo).tapp
 
-      def handle_result(payload)
-        build_id = payload.delete('build_id')
-        Build.record_result(build_id,payload) if build_id
-      end
+          # This push matches CI criteria. Assign a build_id and trigger the ci.
+          if repo.ci?
+            puts "triggering ci"
+            build_id = Build.start_build(repo)
 
-      def handle_progress(payload)
-        build_id = payload.delete('build_id')
-        Build.add_progress(build_id, payload) if build_id
-      end
-
-      def handle_ci(repo,payload)
-        repo.tap {|r|
-          r['ref'] = payload['ref']
-        }
-
-        repo = Repo.record_repo(repo).tapp
-
-        if repo.ci?
-          puts "triggering ci"
-          build_id = Build.start_build(repo)
-
-          {:build_id => build_id.to_s, :name => repo.full_name, :repo => {:url => repo.private_repo_url, :ref => repo.current_ref, :sha => repo.after}}
+            # this triggers CI on workers
+            {:build_id => build_id.to_s, :name => repo.full_name, :repo => {:url => repo.private_repo_url, :ref => repo.current_ref, :sha => repo.after}}
+          end
         end
       end
     end

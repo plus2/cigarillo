@@ -6,6 +6,10 @@ require 'cigarillo'
 use Igor::Logger, $stderr
 use Igor::PayloadParsers::JSON
 
+
+use Cigarillo::Coordinator::ProgressRecorder
+use Cigarillo::Coordinator::ResultRecorder
+
 run Cigarillo::Coordinator::Igor.new
 
 # vim: ft=ruby

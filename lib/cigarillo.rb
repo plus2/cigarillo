@@ -13,6 +13,8 @@ module Cigarillo
     autoload :Igor, "cigarillo/coordinator/igor"
     autoload :Repo, "cigarillo/coordinator/repo"
     autoload :Build, "cigarillo/coordinator/build"
+    autoload :ProgressRecorder, "cigarillo/coordinator/progress_recorder"
+    autoload :ResultRecorder, "cigarillo/coordinator/result_recorder"
   end
 
   module Utils
