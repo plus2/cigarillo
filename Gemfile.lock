@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/plustwo/igor.git
-  revision: 0fdbaa109769044c1002492c12348502d92eb94a
+  revision: 46153da3ddf169a186259d95b5730222a1391451
   branch: rebirth_clean
   specs:
     igor (0.0.1)
