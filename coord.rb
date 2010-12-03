@@ -1,5 +1,5 @@
 require 'peace_love'
-PeaceLove.connect(:database => 'ci')
+PeaceLove.connect(options.mongo)
 
 initialiser(:before_subscription) do
 end
