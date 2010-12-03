@@ -1,3 +1,4 @@
 .*.sw?
 workbench
 config.yml
+coord.yml

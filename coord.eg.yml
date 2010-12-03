@@ -16,3 +16,6 @@ response_exchanges:
   - name: plus2.messages
     kind: topic
     key: campfire.General
+
+mongo:
+  database: ci
