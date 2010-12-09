@@ -30,6 +30,10 @@ module Cigarillo
         collection.find(:_id => BSON::ObjectId(id)).first
       end
 
+      def repo
+        @repo ||= Cigarillo::Coordinator::Repo.find(repo_id)
+      end
+
       def succeeded?
         result.status == 'ok'
       end

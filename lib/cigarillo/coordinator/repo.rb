@@ -4,12 +4,21 @@ module Cigarillo
       include PeaceLove::Doc
       mongo_collection 'repos'
 
+      def self.to_oid(id)
+        case id
+        when BSON::ObjectId
+          id
+        else
+          BSON::ObjectId(id.to_s)
+        end
+      end
+
       def self.all
         collection.find()
       end
 
       def self.find(id)
-        collection.find(:_id => BSON::ObjectId(id)).first
+        collection.find(:_id => to_oid(id)).first
       end
 
       def builds
