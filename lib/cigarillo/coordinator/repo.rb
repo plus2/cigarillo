@@ -1,3 +1,6 @@
+require 'bunny'
+require 'yajl'
+
 module Cigarillo
   module Coordinator
     module Repo
@@ -78,6 +81,18 @@ module Cigarillo
 
       def del_ref_from_ci(ref)
         __collection.update( {:_id=>_id}, :$unset => {"ci.#{ref}" => 1} )
+      end
+
+      def force_build!(ref)
+        exchange = $cigarillo_config.ui.build_exchange
+
+        Build.start_build(self).tap {|build|
+          message = build.ci_message(ref)
+
+          Bunny.run($cigarillo_config.amqp) do |b|
+            b.exchange(exchange.name, :type => exchange.kind).publish(Yajl::Encoder.encode(message))
+          end
+        }
       end
     end
   end

@@ -29,9 +29,10 @@ module Cigarillo
         redirect "/repos/#{@repo._id}"
       end
 
-      get '/repos/:id/force-build' do |id|
+      get '/repos/:id/force-build/:ref' do |id,ref|
         @repo = Cigarillo::Coordinator::Repo.find(id)
-        redirect '/'
+        @build = @repo.force_build!(ref)
+        redirect "/builds/#{@build._id}"
       end
 
       get '/builds/:id' do |id|
