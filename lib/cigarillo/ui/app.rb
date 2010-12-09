@@ -6,11 +6,13 @@ module Cigarillo
       set :root, Cigarillo.root+'ui'
 
       get '/' do
+        @css = %W{index}
         @repos = Cigarillo::Coordinator::Repo.all
         haml :index
       end
 
       get '/repos/:id' do |id|
+        @css = %W{repo}
         @repo = Cigarillo::Coordinator::Repo.find(id)
         haml :repo
       end
@@ -33,6 +35,7 @@ module Cigarillo
       end
 
       get '/builds/:id' do |id|
+        @css = %W{build}
         @build = Cigarillo::Coordinator::Build.find(id)
         haml :build
       end

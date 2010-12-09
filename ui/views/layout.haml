@@ -1,0 +1,12 @@
+!!!
+%html(lang="en")
+  %head
+    %title Cigarillo
+    %meta(charset="utf-8")
+    %link(rel='stylesheet' href='/stylesheets/screen.css' type='text/css' media='screen, projection')
+    
+  %body(class="#{@css * ' '}")
+    %header
+      %h1 Cigarillo
+    %section#content
+      = yield
