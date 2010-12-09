@@ -7,7 +7,8 @@ module Cigarillo
       mongo_collection 'builds'
 
       def self.start_build(repo)
-        collection.insert :created_at => Time.now.strftime("%Y-%m-%d %H:%M:%S"), :repo_id => repo._id, :sha => repo.after
+        id = collection.insert :created_at => Time.now.strftime("%Y-%m-%d %H:%M:%S"), :repo_id => repo._id, :sha => repo.after # XXX sha? current_ref? ref?
+        find(id)
       end
 
       def self.add_progress(build_id,progress)
