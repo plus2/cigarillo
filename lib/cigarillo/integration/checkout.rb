@@ -12,7 +12,15 @@ module Cigarillo
 
       def call(env)
 
-        env['repo']     = repo     ||= Cigarillo::Utils::Repo.new(env['igor.payload'])
+        begin
+          env['repo']     = repo     ||= Cigarillo::Utils::Repo.new(env['igor.payload'])
+        rescue
+          return Cigarillo::Utils::Result.new(env).finish! do |res|
+            res.status :error
+            res.message $!.to_s
+          end
+        end
+
         progress = env['progress']
 
 

@@ -10,7 +10,24 @@ module Cigarillo
       def initialize(config)
         @config = AngryHash[ config ]
 
-        # XXX verify name, url and ref
+        raise_unless_valid!
+      end
+
+
+      def raise_unless_valid!
+        errors = validate
+        unless errors.empty?
+          raise "Repo was invalid: #{errors * ', '}"
+        end
+      end
+
+
+      def validate
+        [].tap {|errors|
+          errors << "no name" unless config.name 
+          errors << "no url"  unless config.repo.url 
+          errors << "no ref"  unless config.repo.ref 
+        }
       end
 
       def name
