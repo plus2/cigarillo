@@ -16,10 +16,11 @@ module Cigarillo
           # This push matches CI criteria. Assign a build_id and trigger the ci.
           if repo.ci?
             puts "triggering ci"
-            build_id = Build.start_build(repo)
+            build = Build.start_build(repo)
 
             # this triggers CI on workers
-            {:build_id => build_id.to_s, :name => repo.full_name, :repo => {:url => repo.private_repo_url, :ref => repo.current_ref, :sha => repo.after}}
+            build.ci_message(repo.current_ref)
+
           end
         end
       end

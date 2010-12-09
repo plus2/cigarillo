@@ -41,6 +41,11 @@ module Cigarillo
       def result
         self['result']
       end
+
+      def ci_message(ref)
+        {:build_id => _id.to_s, :name => repo.full_name, :repo => {:url => repo.private_repo_url, :ref => ref}}
+      end
+      
     end
   end
 end
