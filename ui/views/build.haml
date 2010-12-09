@@ -1,20 +1,34 @@
+%header.main
+  %h2 
+    %a(href="/") repos
+    &raquo;
+    %a(href="/repos/#{@build.repo._id}") #{@build.repo.path_name}
+    &raquo;
+    build detail
+  .extra-info
+    %span.at built at #{@build.created_at}
+    |
+    %span.id id #{@build._id}
+
 %ul
-  %li build #{@build._id}
-  %li built on #{@build.created_at}
-  %li
+  %li.status
+    %h3 status
     - if result = @build.result
       = @build.succeeded? ? "succeeded" : "failed"
       (#{result.status})
-      = result.message
+      %pre
+        :preserve
+          #{html_escape result.message}
       - if result.details
         - result.details.builds.each do |build|
           [env:#{build.env}, success:#{build.success}]
           
     - else
-      no results yet!
-  %li
+      The build hasn't reported any status yet.
+
+  %li.log
+    %h3 progress
     - if @build.progress && !@build.progress.empty?
-      %h4 progress
       %table
         %thead
           %tr
@@ -27,8 +41,11 @@
                   =line.tag
                   = '/'+line.status if line.status
                 %td
-                  %pre= line.msg
-                  - if line.status == 'finished'
-                    in #{line.duration}s
+                  %pre= find_and_preserve(html_escape line.msg)
+
+              - if line.status == 'finished'
+                %tr
+                  %td duration
+                  %td in #{line.duration}s
     - else
       no progress recorded

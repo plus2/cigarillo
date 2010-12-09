@@ -1,4 +1,7 @@
-%ul
-  - @repos.each do |repo|
-    %li
-      %a(href="/repos/#{repo._id}") #{repo.owner}/#{repo.name}
+%header
+  %h2 repos
+%section#projects
+  %ul
+    - @repos.each do |repo|
+      %li
+        %a(href="/repos/#{repo._id}") #{repo.path_name}

@@ -1,27 +1,32 @@
-%h2= @repo.name
-%ul
-  %li 
-    %h3 seen refs
-    %ul
-      - @repo.refs.each do |ref|
-        %li
-          = ref
-          %a(href="/repos/#{@repo._id}/ci/#{ref}") add to CI
-  %li 
-    %h3 do ci on refs
-    %ul
-      - @repo.ci.keys.each do |ref|
-        %li
-          = ref
-          %a(href="/repos/#{@repo._id}/force-build/#{ref}") force build
-          %a(href="/repos/#{@repo._id}/no-ci/#{ref}") remove from CI
-  %li 
-    builds:
-    %ul
-      - @repo.builds.each do |build|
-        %li
-          = build.sha
-          = build.created_at
-          %a(href="/builds/#{build._id}") details
+%header
+  %h2 
+    %a(href="/") repos
+    &raquo;
+    #{@repo.path_name}
+%section#repo
+  %ul
+    %li.seen-refs
+      %h3 seen refs
+      %ul
+        - @repo.refs.each do |ref|
+          %li
+            = ref
+            %a(href="/repos/#{@repo._id}/ci/#{ref}") add to CI
+    %li.ci-refs
+      %h3 do ci on refs
+      %ul
+        - @repo.ci.keys.each do |ref|
+          %li
+            = ref
+            %a(href="/repos/#{@repo._id}/force-build/#{ref}") force build
+            %a(href="/repos/#{@repo._id}/no-ci/#{ref}") remove from CI
+    %li.builds
+      %h3 builds
+      %ul
+        - @repo.builds.each do |build|
+          %li
+            = build.sha
+            = build.created_at
+            %a(href="/builds/#{build._id}") detail
 
 
