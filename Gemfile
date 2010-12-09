@@ -10,11 +10,10 @@ gem 'igor', '~>0.0.1', :git => "git://github.com/plustwo/igor.git", :branch => "
 gem "angry_shell", '~>0.0.1'
 gem "peace_love", '~>0.2.1'
 
-gem "sinatra"
 gem 'yajl-ruby'
 
 group :ui do
-  gem 'sinatra'
+  gem 'sinatra', '~> 1.1.0'
   gem 'haml'
 end
 
