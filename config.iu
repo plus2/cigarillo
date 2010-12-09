@@ -8,7 +8,6 @@ use Igor::PayloadParsers::JSON
 
 use Cigarillo::Integration::ProgressLog
 use Cigarillo::Integration::TimeNazi
-use Cigarillo::Integration::GithubPing
 use Cigarillo::Integration::Checkout
 use Cigarillo::Integration::YmSetup
 use Cigarillo::Integration::CiSetup
