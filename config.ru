@@ -6,10 +6,12 @@ require 'cigarillo'
 require 'angry_hash'
 require 'yaml'
 
-config = AngryHash[ YAML.load_file("coord.yml") ]
+require 'tapp'
+
+$cigarillo_config = AngryHash[ YAML.load_file("coord.yml") ]
 
 require 'peace_love'
-PeaceLove.connect(config.mongo)
+PeaceLove.connect($cigarillo_config.mongo)
 
 
 run Cigarillo::Ui::App.new
