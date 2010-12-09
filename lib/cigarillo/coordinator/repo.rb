@@ -64,6 +64,10 @@ module Cigarillo
         "#{owner}-#{name}"
       end
 
+      def path_name
+        "#{owner}/#{name}"
+      end
+
       def private_repo_url
         "git@github.com:/#{owner}/#{name}.git"
       end
