@@ -27,7 +27,7 @@ module Cigarillo
       end
 
       def self.find(id)
-        collection.find(:_id => BSON::ObjectId(id)).first
+        collection.find(:_id => Repo.to_oid(id)).first
       end
 
       def repo
