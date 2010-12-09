@@ -2,3 +2,9 @@
 workbench
 config.yml
 coord.yml
+config/database.yml
+deploy/load_mob.rb
+deploy/yes_master_dna.json
+tmp/restart.txt
+.sass-cache
+.p2mob_test.rb
