@@ -1,0 +1,24 @@
+header.main {
+  .extra-info {
+    color: #aaa;
+  }
+}
+
+body.build {
+  .log {
+    table {
+      width: 100%
+    }
+    th {
+      color: white;
+      background: black;
+      &:first-child {
+        width:10%;
+      }
+      &:last-child {
+        overflow: hidden;
+      }
+    }
+
+  }
+}
