@@ -27,7 +27,7 @@
       The build hasn't reported any status yet.
 
   %li.log
-    %h3 progress
+    %h3 log
     - if @build.progress && !@build.progress.empty?
       %table
         %thead
@@ -48,4 +48,4 @@
                   %td duration
                   %td in #{line.duration}s
     - else
-      no progress recorded
+      empty
