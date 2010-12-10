@@ -4,6 +4,8 @@ module Cigarillo
   module Ui
     class App < Sinatra::Base
       set :root, Cigarillo.root+'ui'
+      
+      enable :logging, :dump_errors
 
       get '/' do
         @css = %W{index}
