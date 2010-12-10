@@ -6,14 +6,16 @@
 %section#repo
   %ul
     %li.seen-refs
-      %h3 seen refs
+      %h3 all refs
+      These are refs seen by cigarillo, as they've been pushed to github.
       %ul
         - @repo.refs.each do |ref|
           %li
             = ref
             %a(href="/repos/#{@repo._id}/ci/#{ref}") add to CI
     %li.ci-refs
-      %h3 do ci on refs
+      %h3 ci refs
+      These are refs marked for CI. As they're pushed to github, they'll be built.
       %ul
         - @repo.ci.keys.each do |ref|
           %li
