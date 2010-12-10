@@ -14,4 +14,18 @@ require 'peace_love'
 PeaceLove.connect($cigarillo_config.mongo)
 
 
+require 'pathname'
+
+if ENV['RACK_ENV'] == 'production'
+  log = Pathname('../cigarillo.ui.log').expand_path(__FILE__)
+  puts "Note: now redirecting all output to #{log}"
+
+  log.open('a').tap {|l|
+    $stdout.reopen(l)
+    $stderr.reopen(l)
+  }
+end
+
+
+
 run Cigarillo::Ui::App.new
