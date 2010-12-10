@@ -86,7 +86,7 @@ module Cigarillo
       def force_build!(ref)
         exchange = $cigarillo_config.ui.build_exchange
 
-        Build.start_build(self).tap {|build|
+        Build.start_build(self,ref).tap {|build|
           message = build.ci_message(ref)
 
           Bunny.run($cigarillo_config.amqp) do |b|

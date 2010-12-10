@@ -6,8 +6,9 @@ module Cigarillo
       include PeaceLove::Doc
       mongo_collection 'builds'
 
-      def self.start_build(repo)
-        id = collection.insert :created_at => Time.now.strftime("%Y-%m-%d %H:%M:%S"), :repo_id => repo._id, :sha => repo.after # XXX sha? current_ref? ref?
+      def self.start_build(repo, ref=nil)
+        ref ||= repo.current_ref
+        id = collection.insert :created_at => Time.now.strftime("%Y-%m-%d %H:%M:%S"), :repo_id => repo._id, :sha => repo.after, :ref => ref # XXX sha? current_ref? ref?
         find(id)
       end
 
@@ -43,8 +44,9 @@ module Cigarillo
         self['result']
       end
 
-      def ci_message(ref)
-        {:build_id => _id.to_s, :name => repo.full_name, :repo => {:url => repo.private_repo_url, :ref => ref}}
+      def ci_message(ref_to_build=nil)
+        ref_to_build ||= ref
+        {:build_id => _id.to_s, :name => repo.full_name, :repo => {:url => repo.private_repo_url, :ref => ref_to_build}}
       end
       
     end
