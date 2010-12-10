@@ -25,8 +25,8 @@
       %ul
         - @repo.builds.each do |build|
           %li
-            = build.sha
             = build.created_at
+            = build.ref
             %a(href="/builds/#{build._id}") detail
 
 
