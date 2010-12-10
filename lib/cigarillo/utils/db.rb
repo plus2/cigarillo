@@ -98,6 +98,12 @@ module Cigarillo
           else
             sh("mysqladmin -u#{creator_username} -p#{creator_password} create #{database}").run
           end
+        rescue AngryShell::ShellError
+          if $!.result.stderr[/database exists/]
+            puts "database exists, but that's ok with me"
+          else
+            raise $!
+          end
         end
       end
     end
