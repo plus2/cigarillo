@@ -78,10 +78,18 @@ module Cigarillo
         def username; 'root' end
 
         def creator_username 
-          igorenv['cigarillo.mysql'].creator_username || 'root'
+          begin
+            igorenv['cigarillo.mysql'].creator_username
+          rescue
+            'root'
+          end
         end
         def creator_password
-          igorenv['cigarillo.mysql'].creator_password || ''
+          begin
+            igorenv['cigarillo.mysql'].creator_password
+          rescue
+            ''
+          end
         end
 
         def create
