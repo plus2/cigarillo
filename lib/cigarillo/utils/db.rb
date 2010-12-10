@@ -88,12 +88,16 @@ module Cigarillo
           begin
             igorenv['cigarillo.mysql'].creator_password
           rescue
-            ''
+            nil
           end
         end
 
         def create
-          sh("mysqladmin -u#{creator_username} -p#{creator_password} create #{database}").run
+          if creator_password.nil?
+            sh("mysqladmin -u#{creator_username} create #{database}").run
+          else
+            sh("mysqladmin -u#{creator_username} -p#{creator_password} create #{database}").run
+          end
         end
       end
     end
