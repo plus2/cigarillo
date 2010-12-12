@@ -4,6 +4,55 @@
     &rsaquo;
     #{@repo.path_name}
 %section#repo
+
+  %h3 Builds
+  %table
+    %thead
+      %tr
+        %th(scope="col") Reference
+        %th(scope="col") Date created
+        %th(scope="col") Build details
+    %tbody
+      - @repo.builds.each do |build|
+        %tr
+          %td= build.created_at
+          %td= build.ref
+          %td
+            %a(href="/builds/#{build._id}") detail  
+   
+  %h3 CI references
+  %p These are refs marked for CI. As they're pushed to github, they'll be built.
+  %table
+    %thead
+      %tr
+        %th(scope="col") Reference
+        %th(scope="col") Force build
+        %th(scope="col") Managed
+    %tbody
+      - @repo.ci.keys.each do |ref|
+        %tr
+          %td= ref
+          %td
+            %a(href="/repos/#{@repo._id}/force-build/#{ref}") force build
+          %td
+            %a(href="/repos/#{@repo._id}/no-ci/#{ref}") remove from CI
+            
+  %h3 All references
+  %p These are refs seen by cigarillo, as they've been pushed to github.
+  %table
+    %thead
+      %tr
+        %th(scope="col") Repository
+        %th(scope="col") Last updated
+        %th(scope="col") Managed
+    %tbody
+      - @repo.refs.each do |ref|
+        %tr
+          %td= ref
+          %td date here maybe?
+          %td
+            %a(href="/repos/#{@repo._id}/ci/#{ref}") add to CI
+        
   %ul
     %li.seen-refs
       %h3 all refs

@@ -173,21 +173,33 @@ body {
         body #canvas #content h2 a:active, body #canvas #content h2 a:hover, body #canvas #content h2 a:focus {
           color: #fff;
           background: #b63d1c; }
+      body #canvas #content h3 {
+        font-size: 1.5em;
+        margin-bottom: .25em;
+        color: #361005;
+        font-weight: normal; }
       body #canvas #content ul {
         list-style: decimal-leading-zero;
         margin: 10px 0 10px 2em; }
         body #canvas #content ul li {
           margin: 1em 0; }
-
-header.main .extra-info {
-  color: #aaa; }
-
-body.build .log table {
-  width: 100%; }
-body.build .log th {
-  color: white;
-  background: black; }
-  body.build .log th:first-child {
-    width: 10%; }
-  body.build .log th:last-child {
-    overflow: hidden; }
+      body #canvas #content table {
+        margin: 1em 0 3em;
+        width: 100%; }
+        body #canvas #content table thead th {
+          font-size: .7em;
+          letter-spacing: 2px;
+          text-transform: uppercase;
+          color: #fff;
+          background: #A69379;
+          font-weight: normal;
+          text-align: left;
+          padding: 10px 5px 5px 5px;
+          border-bottom: 1px dashed #d6c0ad; }
+        body #canvas #content table tbody {
+          font-size: .83em;
+          font-family: sans-serif; }
+          body #canvas #content table tbody tr td {
+            padding: 10px 5px; }
+          body #canvas #content table tbody tr:nth-child(even) td {
+            background: #fbf3ec; }
