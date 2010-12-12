@@ -92,8 +92,8 @@ body {
   body #canvas {
     margin: 0;
     width: 880px;
-    display: block;
-    height: 100%; }
+    padding-bottom: 100px;
+    display: block; }
     body #canvas nav.nav {
       float: left;
       width: 247px;
