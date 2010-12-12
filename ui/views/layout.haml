@@ -6,7 +6,27 @@
     %link(rel='stylesheet' href='/stylesheets/screen.css' type='text/css' media='screen, projection')
     
   %body(class="#{@css * ' '}")
-    %header
-      %h1 Cigarillo
-    %section#content
-      = yield
+    #canvas
+      %nav.nav
+        %header.header
+          %h1
+            %a(href="/") Cigarillo
+        %ul
+          %li
+            %a(href="/repos/#") Repo name here
+          %li
+            %a.active(href="/repos/#") Repo name here
+          %li
+            %a(href="/repos/#") Repo name here
+          %li
+            %a(href="/repos/#") Repo name here
+          %li
+            %a(href="/repos/#") Repo name here
+          %li
+            %a(href="/repos/#") Repo name here
+          %li
+            %a(href="/repos/#") Repo name here
+          %li
+            %a(href="/repos/#") Repo name here
+            
+      %section#content= yield

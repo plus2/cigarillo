@@ -1,3 +1,168 @@
+/* 
+html5doctor.com Reset Stylesheet
+v1.4.1 
+2010-03-01
+Author: Richard Clark - http://richclarkdesign.com
+*/
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent; }
+
+body {
+  line-height: 1; }
+
+:focus {
+  outline: 1; }
+
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary {
+  display: block; }
+
+nav ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+a {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent; }
+
+ins {
+  background-color: #ff9;
+  color: #000;
+  text-decoration: none; }
+
+mark {
+  background-color: #ff9;
+  color: #000;
+  font-style: italic;
+  font-weight: bold; }
+
+del {
+  text-decoration: line-through; }
+
+abbr[title], dfn[title] {
+  border-bottom: 1px dotted #000;
+  cursor: help; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #cccccc;
+  margin: 1em 0;
+  padding: 0; }
+
+input, select {
+  vertical-align: middle; }
+
+body {
+  font-family: Georgia, serif;
+  background: #f1e5db url(/images/bg-nav.gif) repeat-y left top; }
+  body #canvas {
+    margin: 0;
+    width: 880px;
+    display: block;
+    height: 100%; }
+    body #canvas nav.nav {
+      float: left;
+      width: 247px;
+      margin: 25px 0;
+      color: #decfc2; }
+      body #canvas nav.nav h1 {
+        margin: 0 0 0 20px;
+        padding: 0;
+        border: 0;
+        width: 290px;
+        height: 91px;
+        text-indent: -200000px;
+        overflow: hidden;
+        font-size: .001em; }
+        body #canvas nav.nav h1 a:link, body #canvas nav.nav h1 a:visited, body #canvas nav.nav h1 a:active, body #canvas nav.nav h1 a:hover, body #canvas nav.nav h1 a:focus {
+          display: block;
+          width: 290px;
+          height: 91px;
+          background: url(/images/logo.gif) no-repeat left top; }
+      body #canvas nav.nav ul {
+        list-style: none;
+        margin: 25px 0;
+        padding: 0; }
+        body #canvas nav.nav ul li {
+          font-size: .7em;
+          letter-spacing: 2px;
+          text-transform: uppercase; }
+          body #canvas nav.nav ul li a {
+            display: block; }
+            body #canvas nav.nav ul li a:link, body #canvas nav.nav ul li a:visited {
+              padding: 12px 20px;
+              color: #decfc2;
+              text-decoration: none; }
+            body #canvas nav.nav ul li a:active, body #canvas nav.nav ul li a:hover, body #canvas nav.nav ul li a:focus, body #canvas nav.nav ul li a.active {
+              background: #b63d1c url(/images/bg-nav-on.gif) no-repeat -12px top; }
+    body #canvas #content {
+      float: right;
+      width: 600px;
+      margin: 80px 0 0 0; }
+      body #canvas #content a:link, body #canvas #content a:visited {
+        padding: 2px;
+        color: #b63d1c;
+        background: #decfc2;
+        text-decoration: none; }
+      body #canvas #content a:active, body #canvas #content a:hover, body #canvas #content a:focus {
+        color: #fff;
+        background: #b63d1c; }
+      body #canvas #content h2 {
+        font-size: .83em;
+        margin-bottom: 20px;
+        padding-bottom: 5px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #361005;
+        font-weight: normal;
+        border-bottom: 1px dashed #361005; }
+        body #canvas #content h2 a:link, body #canvas #content h2 a:visited {
+          color: #6c5954;
+          text-decoration: none;
+          background: none; }
+        body #canvas #content h2 a:active, body #canvas #content h2 a:hover, body #canvas #content h2 a:focus {
+          color: #fff;
+          background: #b63d1c; }
+      body #canvas #content ul {
+        list-style: decimal-leading-zero;
+        margin: 10px 0 10px 2em; }
+        body #canvas #content ul li {
+          margin: 1em 0; }
+
 header.main .extra-info {
   color: #aaa; }
 

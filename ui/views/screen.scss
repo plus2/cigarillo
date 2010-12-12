@@ -1,3 +1,110 @@
+@import "reset";
+
+body {
+  font-family: Georgia, serif;
+  background: #f1e5db url(/images/bg-nav.gif) repeat-y left top;  
+  #canvas {
+    margin: 0;
+    width: 880px;
+    display: block;
+    height: 100%;
+    nav.nav {
+      float: left;
+      width: 247px;
+      margin: 25px 0;
+      color: #decfc2;
+      h1 {
+        margin: 0 0 0 20px;
+        padding: 0;
+        border: 0;
+        width: 290px;
+        height: 91px;
+        text-indent: -200000px;
+        overflow: hidden;
+        font-size: .001em;
+        a {
+          &:link, &:visited, &:active, &:hover, &:focus {
+            display: block;
+            width: 290px;
+            height: 91px;          
+            background: url(/images/logo.gif) no-repeat left top;            
+          }
+        }
+      } // h1
+      ul {
+        list-style: none;
+        margin: 25px 0;
+        padding: 0;
+        li {
+          font-size: .7em;
+          letter-spacing: 2px;
+          text-transform: uppercase;
+          a {
+            display: block;
+            &:link, &:visited {
+              padding: 12px 20px;
+              color: #decfc2;
+              text-decoration: none;
+            }
+            &:active, &:hover, &:focus, &.active {
+              background: #b63d1c url(/images/bg-nav-on.gif) no-repeat -12px top;
+            }
+          } // a
+        }
+      } // ul
+    } // nav
+    #content {
+      float: right;
+      width: 600px;
+      margin: 80px 0 0 0;
+      a {
+        &:link, &:visited {
+          padding: 2px;
+          color: #b63d1c;
+          background: #decfc2;
+          text-decoration: none;
+        }
+        &:active, &:hover, &:focus {
+          color: #fff;
+          background: #b63d1c;
+        }
+      }
+      h2 {
+        font-size: .83em;
+        margin-bottom: 20px;
+        padding-bottom: 5px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #361005;
+        font-weight: normal;
+        border-bottom: 1px dashed #361005;
+        a {
+          &:link, &:visited {
+            color: #6c5954;
+            text-decoration: none;
+            background: none;
+          }
+          &:active, &:hover, &:focus {
+            color: #fff;
+            background: #b63d1c;
+          }
+        } // a
+      } // h2
+      
+      ul {
+        list-style: decimal-leading-zero;
+        margin: 10px 0 10px 2em;
+        li {
+          margin: 1em 0;
+        }
+      }
+      
+    } // #content
+  } // #canvas  
+} // body
+
+
+
 header.main {
   .extra-info {
     color: #aaa;
