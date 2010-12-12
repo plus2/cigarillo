@@ -129,6 +129,22 @@ body {
               text-decoration: none; }
             body #canvas nav.nav ul li a:active, body #canvas nav.nav ul li a:hover, body #canvas nav.nav ul li a:focus, body #canvas nav.nav ul li a.active {
               background: #b63d1c url(/images/bg-nav-on.gif) no-repeat -12px top; }
+          body #canvas nav.nav ul li ul {
+            margin: 0;
+            padding: 0;
+            background: #b63d1c; }
+            body #canvas nav.nav ul li ul li {
+              text-transform: lowercase;
+              font-size: 1em; }
+              body #canvas nav.nav ul li ul li a {
+                display: block; }
+                body #canvas nav.nav ul li ul li a:link, body #canvas nav.nav ul li ul li a:visited {
+                  padding: 5px 40px;
+                  color: #decfc2;
+                  text-decoration: none; }
+                body #canvas nav.nav ul li ul li a:active, body #canvas nav.nav ul li ul li a:hover, body #canvas nav.nav ul li ul li a:focus, body #canvas nav.nav ul li ul li a.active {
+                  color: #111;
+                  background: #FDD166; }
     body #canvas #content {
       float: right;
       width: 600px;

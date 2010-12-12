@@ -50,7 +50,28 @@ body {
               background: #b63d1c url(/images/bg-nav-on.gif) no-repeat -12px top;
             }
           } // a
-        }
+          ul {
+            margin: 0;
+            padding: 0;
+            background: #b63d1c;
+            li {
+              text-transform: lowercase;
+              font-size: 1em;
+              a {
+                display: block;
+                &:link, &:visited {
+                  padding: 5px 40px;
+                  color: #decfc2;
+                  text-decoration: none;
+                }
+                &:active, &:hover, &:focus, &.active {
+                  color: #111;
+                  background: #FDD166;
+                }
+              } // a
+            }
+          }
+        } // li
       } // ul
     } // nav
     #content {
