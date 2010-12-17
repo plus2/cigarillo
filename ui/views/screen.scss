@@ -6,8 +6,6 @@ body {
   font-family: Georgia, serif;
   background: #f1e5db url(/images/bg-nav.gif) repeat-y left top;  
   #canvas {
-
-
     margin: 0;
     width: 880px;
     padding-bottom: 100px;
@@ -46,21 +44,34 @@ body {
           a {
             display: block;
             &:link, &:visited {
-              padding: 12px 20px;
+              padding: 10px 20px 14px 20px;
               color: $pinky;
               text-decoration: none;
+              text-shadow: 1px 1px 0 #333;
             }
             &:active, &:hover, &:focus, &.active {
-              background: #b63d1c url(/images/bg-nav-on.gif) no-repeat -12px top;
+              color: #fff;
+              background: #b63d1c url(/images/bg-nav-on.gif) no-repeat -12px 2px;
+              text-shadow: 1px 1px 0 #db390b;
+              span.owner {
+                color: #771e07;
+                text-shadow: 1px 1px 0 #e16745;
+              }
             }
-
             .owner {
               font-size: .6em;
+              padding-bottom: 4px;
               color: $pinky * 0.6;
               display: block;
             }
           } // a
-
+          &.more a {
+            &:active, &:hover, &:focus, &.active {
+              background: transparent;
+              text-shadow: none;
+              text-decoration: underline;
+            }
+          }
           &.active ul {
             display: inline;
           }
