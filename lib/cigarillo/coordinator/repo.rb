@@ -34,7 +34,7 @@ module Cigarillo
       end
 
       def builds
-        Build.for_repo(self)
+        Build.for_repo(self, :sort => [[:created_at, :desc]])
       end
 
       def self.record_repo(repo)
