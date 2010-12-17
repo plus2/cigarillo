@@ -31,15 +31,15 @@ GEM
     angry_hash (0.3.2)
     angry_shell (0.0.1)
     awesome_print (0.3.1)
-    bson (1.1.1)
+    bson (1.1.5)
     bunny (0.6.0)
     eventmachine (0.12.10)
-    haml (3.0.22)
-    mongo (1.1.1)
-      bson (>= 1.1.1)
-    peace_love (0.2.1)
+    haml (3.0.24)
+    mongo (1.1.5)
+      bson (>= 1.1.5)
+    peace_love (0.2.2)
       angry_hash (~> 0.3.2)
-      mongo (~> 1.1.0)
+      mongo (~> 1.1.5)
     rack (1.2.1)
     sinatra (1.1.0)
       rack (~> 1.1)
@@ -54,11 +54,12 @@ PLATFORMS
 DEPENDENCIES
   angry_shell (~> 0.0.1)
   awesome_print
+  bson (= 1.1.5)
   bunny
   exemplor!
   haml
   igor (~> 0.0.1)!
   lachie-tapp!
-  peace_love (~> 0.2.1)
+  peace_love (~> 0.2.2)
   sinatra (~> 1.1.0)
   yajl-ruby
