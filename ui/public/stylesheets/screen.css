@@ -124,15 +124,26 @@ body {
           body #canvas nav.nav ul li a {
             display: block; }
             body #canvas nav.nav ul li a:link, body #canvas nav.nav ul li a:visited {
-              padding: 12px 20px;
+              padding: 10px 20px 14px 20px;
               color: #decfc2;
-              text-decoration: none; }
+              text-decoration: none;
+              text-shadow: 1px 1px 0 #333; }
             body #canvas nav.nav ul li a:active, body #canvas nav.nav ul li a:hover, body #canvas nav.nav ul li a:focus, body #canvas nav.nav ul li a.active {
-              background: #b63d1c url(/images/bg-nav-on.gif) no-repeat -12px top; }
+              color: #fff;
+              background: #b63d1c url(/images/bg-nav-on.gif) no-repeat -12px 2px;
+              text-shadow: 1px 1px 0 #db390b; }
+              body #canvas nav.nav ul li a:active span.owner, body #canvas nav.nav ul li a:hover span.owner, body #canvas nav.nav ul li a:focus span.owner, body #canvas nav.nav ul li a.active span.owner {
+                color: #771e07;
+                text-shadow: 1px 1px 0 #e16745; }
             body #canvas nav.nav ul li a .owner {
               font-size: .6em;
+              padding-bottom: 4px;
               color: #857c74;
               display: block; }
+          body #canvas nav.nav ul li.more a:active, body #canvas nav.nav ul li.more a:hover, body #canvas nav.nav ul li.more a:focus, body #canvas nav.nav ul li.more a.active {
+            background: transparent;
+            text-shadow: none;
+            text-decoration: underline; }
           body #canvas nav.nav ul li.active ul {
             display: inline; }
           body #canvas nav.nav ul li ul {
