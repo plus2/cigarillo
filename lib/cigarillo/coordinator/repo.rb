@@ -20,6 +20,11 @@ module Cigarillo
         collection.find()
       end
 
+      def self.all_by_last_seen_at(limit=nil)
+        opts = {:limit => limit, :sort => [[:last_seen_at,:desc]]}
+        collection.find({}, opts)
+      end
+
       def self.find(id)
         collection.find(:_id => to_oid(id)).first
       end
