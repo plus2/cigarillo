@@ -44,17 +44,28 @@ module Cigarillo
 
         repo = collection.find_one(:name => name, :owner => owner)
         
+        now = Time.now.to_i
+
         if repo
           repo['refs'].tap {|r|
             r << ref
             r.uniq!
           }
-          collection.update({:name => name, :owner => owner}, :$addToSet => {:refs => ref})
+
+          collection.update({:name => name, :owner => owner},
+                            :$addToSet => {:refs => ref},
+                            :$push     => {:reflog => {:ref => ref, :at => now}},
+                            :$set      => {:last_seen_at => now}
+                           )
         else
           collection.insert(
             :name  => name,
             :owner => owner,
+
+            :last_seen_at => now,
             :refs  => [ref],
+            :reflog => [ {:ref => ref, :at => now} ],
+
             :ci    => {}
           )
           repo = collection.find_one(:name => name, :owner => owner)
