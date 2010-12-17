@@ -8,7 +8,7 @@ module Cigarillo
       enable :logging, :dump_errors
 
       before do
-        @repos_menu = Cigarillo::Coordinator::Repo.all_by_last_seen_at(5).to_a
+        @repos_menu = Cigarillo::Coordinator::Repo.all_by_last_seen_at(10).to_a
         @more_menu_repos = Cigarillo::Coordinator::Repo.count > @repos_menu.size
 
         @submenu_active = {}
