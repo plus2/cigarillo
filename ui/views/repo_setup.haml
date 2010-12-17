@@ -1,0 +1,40 @@
+%header
+  %h2 
+    %a(href="/") repos
+    &rsaquo;
+    #{@repo.path_name}
+
+%section#repo
+
+  %h3 CI refs
+  %p These are refs marked for CI. As they're pushed to github, they'll be built.
+  %table
+    %thead
+      %tr
+        %th(scope="col") Ref
+        %th(scope="col")
+        %th(scope="col")
+    %tbody
+      - @repo.ci.keys.each do |ref|
+        %tr
+          %td= ref
+          %td
+            %a(href="/repos/#{@repo._id}/force-build/#{ref}") force build
+          %td
+            %a(href="/repos/#{@repo._id}/no-ci/#{ref}") remove from CI
+            
+  %h3 All refs
+  %p These are refs seen by cigarillo, as they've been pushed to github.
+  %table
+    %thead
+      %tr
+        %th(scope="col") Ref
+        %th(scope="col") Push seen
+        %th(scope="col") 
+    %tbody
+      - (@repo.reflog || []).each do |log|
+        %tr
+          %td= log.ref
+          %td= Time.at(log.at)
+          %td
+            %a(href="/repos/#{@repo._id}/ci/#{log.ref}") add to CI

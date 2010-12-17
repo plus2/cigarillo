@@ -129,10 +129,17 @@ body {
               text-decoration: none; }
             body #canvas nav.nav ul li a:active, body #canvas nav.nav ul li a:hover, body #canvas nav.nav ul li a:focus, body #canvas nav.nav ul li a.active {
               background: #b63d1c url(/images/bg-nav-on.gif) no-repeat -12px top; }
+            body #canvas nav.nav ul li a .owner {
+              font-size: .6em;
+              color: #857c74;
+              display: block; }
+          body #canvas nav.nav ul li.active ul {
+            display: inline; }
           body #canvas nav.nav ul li ul {
             margin: 0;
             padding: 0;
-            background: #b63d1c; }
+            background: #b63d1c;
+            display: none; }
             body #canvas nav.nav ul li ul li {
               text-transform: lowercase;
               font-size: 1em; }

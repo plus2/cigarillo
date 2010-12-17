@@ -38,8 +38,8 @@
             %th message
           %tbody
             - @build.progress.each do |line|
-              %tr
-                %td 
+              %tr(class="#{line.tag.downcase.gsub(/[^a-z]+/,'-')}")
+                %td
                   =line.tag
                   = '/'+line.status if line.status
                 %td

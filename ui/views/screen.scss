@@ -1,9 +1,13 @@
 @import "reset";
 
+$pinky: #decfc2;
+
 body {
   font-family: Georgia, serif;
   background: #f1e5db url(/images/bg-nav.gif) repeat-y left top;  
   #canvas {
+
+
     margin: 0;
     width: 880px;
     display: block;
@@ -43,17 +47,32 @@ body {
             display: block;
             &:link, &:visited {
               padding: 12px 20px;
-              color: #decfc2;
+              color: $pinky;
               text-decoration: none;
             }
             &:active, &:hover, &:focus, &.active {
               background: #b63d1c url(/images/bg-nav-on.gif) no-repeat -12px top;
             }
+
+            .owner {
+              font-size: .6em;
+              color: $pinky * 0.6;
+              display: block;
+            }
           } // a
+
+          &.active ul {
+            display: inline;
+          }
+
           ul {
             margin: 0;
             padding: 0;
             background: #b63d1c;
+
+            display: none;
+
+                        
             li {
               text-transform: lowercase;
               font-size: 1em;
