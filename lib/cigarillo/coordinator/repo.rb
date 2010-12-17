@@ -29,6 +29,10 @@ module Cigarillo
         collection.find(:_id => to_oid(id)).first
       end
 
+      def self.count
+        collection.count
+      end
+
       def builds
         Build.for_repo(self)
       end
