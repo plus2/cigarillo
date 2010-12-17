@@ -9,6 +9,8 @@ module Cigarillo
       def self.start_build(repo, ref=nil)
         ref ||= repo.current_ref
         id = collection.insert :created_at => Time.now.strftime("%Y-%m-%d %H:%M:%S"), :repo_id => repo._id, :sha => repo.after, :ref => ref # XXX sha? current_ref? ref?
+        collection.ensure_index([['repo_id', Mongo::ASCENDING]])
+        collection.ensure_index([['created_at', Mongo::DESCENDING]])
         find(id)
       end
 
