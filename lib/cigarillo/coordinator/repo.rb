@@ -33,8 +33,9 @@ module Cigarillo
         collection.count
       end
 
-      def builds
-        Build.for_repo(self, :sort => [[:created_at, :desc]])
+      def builds(options={})
+        options[:sort] ||= [[:created_at, :desc]]
+        Build.for_repo(self, options)
       end
 
       def self.record_repo(repo)
