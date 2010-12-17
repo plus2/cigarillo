@@ -27,7 +27,8 @@ module Cigarillo
       end
 
       def self.for_repo(repo,options={})
-        options[:sort] ||= [['created_at',:asc]]
+
+        options[:sort] ||= [['created_at',:desc]]
         collection.find({:repo_id => repo._id}, options)
       end
 
