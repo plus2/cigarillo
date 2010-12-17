@@ -1,12 +1,25 @@
 GIT
+  remote: git://github.com/lachie/tapp.git
+  revision: cbfa50517d2e3b04a74d51c55ebb3bb5df3b1df9
+  specs:
+    lachie-tapp (1.2.0)
+
+GIT
+  remote: git://github.com/plustwo/exemplor.git
+  revision: 5b74a08f566d99a0ec32eae2e44cc472fe1b9632
+  branch: master3k
+  specs:
+    exemplor (3000.3.0)
+
+GIT
   remote: git://github.com/plustwo/igor.git
-  revision: 46153da3ddf169a186259d95b5730222a1391451
+  revision: 17035a30cadab849fb2cbd45c2506044e5746b66
   branch: rebirth_clean
   specs:
     igor (0.0.1)
       amqp (~> 0.6.7)
       angry_hash (~> 0.3.2)
-      lachie-tapp (~> 1.1.0)
+      lachie-tapp (~> 1.2.0)
       thor (~> 0.14.3)
       yajl-ruby (~> 0.7.8)
 
@@ -17,12 +30,11 @@ GEM
       eventmachine (>= 0.12.4)
     angry_hash (0.3.2)
     angry_shell (0.0.1)
+    awesome_print (0.3.1)
     bson (1.1.1)
     bunny (0.6.0)
     eventmachine (0.12.10)
-    exemplor (3000.3.0)
     haml (3.0.22)
-    lachie-tapp (1.1.0)
     mongo (1.1.1)
       bson (>= 1.1.1)
     peace_love (0.2.1)
@@ -41,11 +53,12 @@ PLATFORMS
 
 DEPENDENCIES
   angry_shell (~> 0.0.1)
+  awesome_print
   bunny
-  exemplor
+  exemplor!
   haml
   igor (~> 0.0.1)!
-  lachie-tapp
+  lachie-tapp!
   peace_love (~> 0.2.1)
   sinatra (~> 1.1.0)
   yajl-ruby

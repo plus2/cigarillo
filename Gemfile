@@ -1,6 +1,7 @@
 source "http://rubygems.org"
 
-gem 'lachie-tapp'
+gem 'awesome_print'
+gem 'lachie-tapp', :git => 'git://github.com/lachie/tapp.git'
 
 gem 'bunny'
 
@@ -18,5 +19,5 @@ group :ui do
 end
 
 group :test do
-  gem 'exemplor'
+  gem 'exemplor', :git => 'git://github.com/plustwo/exemplor.git', :branch => 'master3k'
 end
