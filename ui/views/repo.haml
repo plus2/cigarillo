@@ -13,7 +13,7 @@
         %th(scope="col") Ref
         %th(scope="col")
     %tbody
-      - @repo.builds.each do |build|
+      - @repo.builds(:fields => %w{created_at ref}).each do |build|
         %tr
           %td= build.created_at
           %td= build.ref
