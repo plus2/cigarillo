@@ -24,8 +24,9 @@ module Cigarillo
         collection.find()
       end
 
-      def self.for_repo(repo)
-        collection.find({:repo_id => repo._id}, :sort => [['created_at',Mongo::ASCENDING]])
+      def self.for_repo(repo,options={})
+        options[:sort] ||= [['created_at',:asc]]
+        collection.find({:repo_id => repo._id}, options)
       end
 
       def self.find(id)
