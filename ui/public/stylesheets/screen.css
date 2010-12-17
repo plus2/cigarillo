@@ -161,6 +161,7 @@ body {
                   color: #decfc2;
                   text-decoration: none; }
                 body #canvas nav.nav ul li ul li a:active, body #canvas nav.nav ul li ul li a:hover, body #canvas nav.nav ul li ul li a:focus, body #canvas nav.nav ul li ul li a.active {
+                  text-shadow: none;
                   color: #111;
                   background: #FDD166; }
     body #canvas #content {

@@ -1,6 +1,7 @@
 @import "reset";
 
 $pinky: #decfc2;
+$darkorange: #db390b;
 
 body {
   font-family: Georgia, serif;
@@ -52,7 +53,7 @@ body {
             &:active, &:hover, &:focus, &.active {
               color: #fff;
               background: #b63d1c url(/images/bg-nav-on.gif) no-repeat -12px 2px;
-              text-shadow: 1px 1px 0 #db390b;
+              text-shadow: 1px 1px 0 $darkorange;
               span.owner {
                 color: #771e07;
                 text-shadow: 1px 1px 0 #e16745;
@@ -89,12 +90,14 @@ body {
               font-size: 1em;
               a {
                 display: block;
+                         
                 &:link, &:visited {
                   padding: 5px 40px;
                   color: #decfc2;
                   text-decoration: none;
                 }
                 &:active, &:hover, &:focus, &.active {
+                  text-shadow: none;
                   color: #111;
                   background: #FDD166;
                 }
