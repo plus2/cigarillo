@@ -30,7 +30,7 @@ module Cigarillo
             repo.checkout!
             repo.submodules!
 
-            sh("bundle install --path=#{Cigarillo.workbench+'bundle'}", :cwd => repo.checkout).run if (repo.checkout+'Gemfile').exist?
+            sh("bundle install --without no_ci --path=#{Cigarillo.workbench+'bundle'}", :cwd => repo.checkout).run if (repo.checkout+'Gemfile').exist?
           end
 
           env['runner.cwd'] = repo.checkout
