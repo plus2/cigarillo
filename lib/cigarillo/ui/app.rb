@@ -60,21 +60,21 @@ module Cigarillo
       end
 
       # no view
-      get '/repos/:id/ci/:ref' do |id,ref|
+      get '/repos/:id/ci/*' do |id,ref|
         @repo = Cigarillo::Coordinator::Repo.find(id)
         @repo.add_ref_to_ci(ref)
         redirect "/repos/#{@repo._id}"
       end
 
       # no view
-      get '/repos/:id/no-ci/:ref' do |id,ref|
+      get '/repos/:id/no-ci/*' do |id,ref|
         @repo = Cigarillo::Coordinator::Repo.find(id)
         @repo.del_ref_from_ci(ref)
         redirect "/repos/#{@repo._id}"
       end
 
       #no view
-      get '/repos/:id/force-build/:ref' do |id,ref|
+      get '/repos/:id/force-build/*' do |id,ref|
         @repo = Cigarillo::Coordinator::Repo.find(id)
         @build = @repo.force_build!(ref)
         redirect "/builds/#{@build._id}"
