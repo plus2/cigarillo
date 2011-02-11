@@ -29,6 +29,8 @@ module Cigarillo
             Pg.new(environment,cfg,igorenv)
           when 'mysql'
             Mysql.new(environment,cfg,igorenv)
+          when 'mysql2'
+            Mysql2.new(environment,cfg,igorenv)
           when 'mongo','mongodb'
             Mongo.new(environment,cfg,igorenv)
           else
@@ -105,6 +107,10 @@ module Cigarillo
             raise $!
           end
         end
+      end
+
+      class Mysql2 < Base
+        def normalised_adapter_name; 'mysql2' end
       end
     end
   end
