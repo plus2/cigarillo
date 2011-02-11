@@ -23,7 +23,7 @@ module Cigarillo
               build.ci_message(repo.current_ref),
 
               # this pings campfire to say the build has started
-              build.campfire_message("build started", repo.current_ref)
+              build.campfire_message("build requested", repo.current_ref)
             ]
           end
         end
