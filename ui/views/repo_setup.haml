@@ -15,23 +15,24 @@
         %th(scope="col")
         %th(scope="col")
     %tbody
-      - if @repo.ci_all
-        %tr
+      %tr
+        - if @repo.ci_all
           %td building all refs
           %td
             %a(href="/repos/#{@repo._id}/ci-selected") build only selected refs
-      - else
-        %tr
-          %td building selected refs
-          %td
-            %a(href="/repos/#{@repo._id}/ci-all") build all refs
-          %td
-      
-        - @repo.ci.keys.each do |ref|
+        - else
           %tr
-            %td= ref
+            %td building selected refs
             %td
-              %a(href="/repos/#{@repo._id}/force-build/#{ref}") force build
+              %a(href="/repos/#{@repo._id}/ci-all") build all refs
+            %td
+      
+      - @repo.ci.keys.each do |ref|
+        %tr
+          %td= ref
+          %td
+            %a(href="/repos/#{@repo._id}/force-build/#{ref}") force build
+          - unless @repo.ci_all
             %td
               %a(href="/repos/#{@repo._id}/no-ci/#{ref}") remove from CI
             
