@@ -56,7 +56,7 @@ module Cigarillo
       def campfire_message(msg,ref_to_build=nil)
         ref_to_build ||= ref
         # the exchange is a bit hard-coded for now
-        {:exchange => 'plus2.messages', :app => 'cigarillo-coord', :msg => "[#{repo.path_name} #{ref}] #{msg} http://ci.plus2dev.com/builds/#{id}"}
+        {:exchange => 'plus2.messages', :app => 'cigarillo-coord', :msg => "[#{repo.path_name} #{ref}] #{msg} http://ci.plus2dev.com/builds/#{_id}"}
       end
         
       
