@@ -26,11 +26,13 @@ module Cigarillo
 
         progress.task :integration do
           progress.task :git do
-            repo.sync!
-            repo.checkout!
-            repo.submodules!
+            progress.task("git.sync") { repo.sync! }
+            progress.task("git.checkout") { repo.checkout! }
+            progress.task("git.submodules") { repo.submodules! }
 
-            sh("bundle install --without no_ci --path=#{Cigarillo.workbench+'bundle'}", :cwd => repo.checkout).run if (repo.checkout+'Gemfile').exist?
+            progress.task("bundle") {
+              sh("bundle install --without no_ci --path=#{Cigarillo.workbench+'bundle'}", :cwd => repo.checkout).run if (repo.checkout+'Gemfile').exist?
+            }
           end
 
           env['runner.cwd'] = repo.checkout

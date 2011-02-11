@@ -18,8 +18,12 @@ module Cigarillo
 
         env['ci'] = YAML.load(ci_yml.read).merge(:path => repo.checkout, :name => repo.name)
 
+        progress = env['progress']
+        
         begin
-          Cigarillo::Utils::Db.new(env['ci'],env).prepare!
+          progress.task("db.preparation") {
+            Cigarillo::Utils::Db.new(env['ci'],env).prepare!
+          }
         rescue
           return Cigarillo::Utils::Result.new(env).finish! do |res|
             res.status :error
