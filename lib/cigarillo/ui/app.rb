@@ -59,18 +59,36 @@ module Cigarillo
         haml :build
       end
 
+      def redir_setup(repo)
+        redirect "/repos/#{repo._id}?setup=1"
+      end
+
       # no view
       get '/repos/:id/ci/*' do |id,ref|
         @repo = Cigarillo::Coordinator::Repo.find(id)
         @repo.add_ref_to_ci(ref)
-        redirect "/repos/#{@repo._id}"
+        redir_setup(@repo)
       end
 
       # no view
       get '/repos/:id/no-ci/*' do |id,ref|
         @repo = Cigarillo::Coordinator::Repo.find(id)
         @repo.del_ref_from_ci(ref)
-        redirect "/repos/#{@repo._id}"
+        redir_setup(@repo)
+      end
+
+      # no view
+      get '/repos/:id/ci-all' do |id|
+        @repo = Cigarillo::Coordinator::Repo.find(id)
+        @repo.set_ci_all!
+        redir_setup(@repo)
+      end
+
+      # no view
+      get '/repos/:id/ci-selected' do |id|
+        @repo = Cigarillo::Coordinator::Repo.find(id)
+        @repo.set_ci_selected!
+        redir_setup(@repo)
       end
 
       #no view

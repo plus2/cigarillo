@@ -15,13 +15,25 @@
         %th(scope="col")
         %th(scope="col")
     %tbody
-      - @repo.ci.keys.each do |ref|
+      - if @repo.ci_all
         %tr
-          %td= ref
+          %td building all refs
           %td
-            %a(href="/repos/#{@repo._id}/force-build/#{ref}") force build
+            %a(href="/repos/#{@repo._id}/ci-selected") build only selected refs
+      - else
+        %tr
+          %td building selected refs
           %td
-            %a(href="/repos/#{@repo._id}/no-ci/#{ref}") remove from CI
+            %a(href="/repos/#{@repo._id}/ci-all") build all refs
+          %td
+      
+        - @repo.ci.keys.each do |ref|
+          %tr
+            %td= ref
+            %td
+              %a(href="/repos/#{@repo._id}/force-build/#{ref}") force build
+            %td
+              %a(href="/repos/#{@repo._id}/no-ci/#{ref}") remove from CI
             
   %h3 All refs
   %p These are refs seen by cigarillo, as they've been pushed to github.

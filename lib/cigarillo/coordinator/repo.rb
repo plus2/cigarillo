@@ -81,7 +81,7 @@ module Cigarillo
       end
 
       def ci?(ref=nil)
-        ci[ ref || current_ref ]
+        ci_all || ci[ ref || current_ref ]
       end
 
       def full_name
@@ -102,6 +102,14 @@ module Cigarillo
 
       def del_ref_from_ci(ref)
         __collection.update( {:_id=>_id}, :$unset => {"ci.#{ref}" => 1} )
+      end
+
+      def set_ci_all!
+        __collection.update( {:_id=>_id}, :$set => {"ci_all" => 1} )
+      end
+
+      def set_ci_selected!
+        __collection.update( {:_id=>_id}, :$unset => {"ci_all" => 1} )
       end
 
       def force_build!(ref)
