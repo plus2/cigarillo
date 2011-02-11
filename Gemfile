@@ -6,7 +6,7 @@ gem 'lachie-tapp', :git => 'git://github.com/lachie/tapp.git'
 gem 'bunny'
 
 # gem 'igor', '~>0.0.1', :path => "~/dev/plus2/igor"
-gem 'igor', '~>0.0.1', :git => "git://github.com/plustwo/igor.git", :branch => "rebirth_clean"
+gem 'igor', '~>0.0.2', :git => "git://github.com/plustwo/igor.git", :branch => "rebirth_clean"
 
 gem "angry_shell", '~>0.0.1'
 gem 'bson_ext', '1.1.5'

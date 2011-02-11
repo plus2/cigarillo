@@ -13,10 +13,10 @@ GIT
 
 GIT
   remote: git://github.com/plustwo/igor.git
-  revision: 17035a30cadab849fb2cbd45c2506044e5746b66
+  revision: bd719d4751a3667497cdc799dacdadb7a4769ea8
   branch: rebirth_clean
   specs:
-    igor (0.0.1)
+    igor (0.0.2)
       amqp (~> 0.6.7)
       angry_hash (~> 0.3.2)
       lachie-tapp (~> 1.2.0)
@@ -59,7 +59,7 @@ DEPENDENCIES
   bunny
   exemplor!
   haml
-  igor (~> 0.0.1)!
+  igor (~> 0.0.2)!
   lachie-tapp!
   peace_love (~> 0.2.2)
   sinatra (~> 1.1.0)
