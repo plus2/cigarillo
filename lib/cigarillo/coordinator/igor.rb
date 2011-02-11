@@ -18,9 +18,13 @@ module Cigarillo
             puts "triggering ci"
             build = Build.start_build(repo)
 
-            # this triggers CI on workers
-            build.ci_message(repo.current_ref)
+            [
+              # this triggers CI on workers
+              build.ci_message(repo.current_ref),
 
+              # this pings campfire to say the build has started
+              build.campfire_message("build started", repo.current_ref)
+            ]
           end
         end
       end
