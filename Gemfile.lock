@@ -32,6 +32,7 @@ GEM
     angry_shell (0.0.1)
     awesome_print (0.3.1)
     bson (1.1.5)
+    bson_ext (1.1.5)
     bunny (0.6.0)
     eventmachine (0.12.10)
     haml (3.0.24)
@@ -54,7 +55,7 @@ PLATFORMS
 DEPENDENCIES
   angry_shell (~> 0.0.1)
   awesome_print
-  bson (= 1.1.5)
+  bson_ext (= 1.1.5)
   bunny
   exemplor!
   haml
