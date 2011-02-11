@@ -109,7 +109,7 @@ module Cigarillo
         end
       end
 
-      class Mysql2 < Base
+      class Mysql2 < Mysql
         def normalised_adapter_name; 'mysql2' end
       end
     end
