@@ -21,6 +21,10 @@ module Cigarillo
             {}
           end
         end
+
+        def ansi_esc(string)
+          Cigarillo::Utils::ANSI.new(string).to_html
+        end
       end
 
       def remove_current_repo_from_menu
