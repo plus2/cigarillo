@@ -3,6 +3,12 @@ require 'tmpdir'
 require 'pathname'
 require 'cigarillo'
 
+class MockProgress
+  def info(tag, msg)
+    puts "#{tag}: #{msg}"
+  end
+end
+
 eg.helpers do
 	def mk_runner(env)
 		Cigarillo::Integration::Runner.new
@@ -20,15 +26,17 @@ eg 'runs' do
 	script_file = script <<-'EOS'
 #!/usr/bin/env ruby
 
+puts "its a pty" if $stdout.tty?
+
 100.times {|i|
 	$stdout.puts "out #{i}"
 	$stderr.puts "err #{i}"
 }
 	EOS
 	
-	env = AngryHash.new
+	env = AngryHash['progress' => MockProgress.new]
 
-	env.ci!.environments!.test!.ci_command = "ruby #{script_file}"
+	env.ci!.environments!.test!.build_command = "ruby #{script_file}"
 	env.repo!.checkout = "/tmp"
 
 	Cigarillo::Integration::Runner.new.call(env)
