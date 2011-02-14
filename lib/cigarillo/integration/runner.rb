@@ -13,7 +13,7 @@ module Cigarillo
           end
 
           cmd = {
-            :cmd => "script -q ci.output bundle exec #{options['build_command']}",
+            :cmd => "script -q ci.output -c 'bundle exec #{options['build_command']}'",
             :cwd => env['runner.cwd'],
             :stream => true,
             :environment => {'RAILS_ENV' => environment, 'RACK_ENV' => environment}
