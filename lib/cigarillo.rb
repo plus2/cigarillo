@@ -23,6 +23,7 @@ module Cigarillo
     autoload :LineProgress, "cigarillo/utils/line_progress"
     autoload :Db,       "cigarillo/utils/db"
     autoload :Result,       "cigarillo/utils/result"
+    autoload :ANSI,     "cigarillo/utils/ansi"
   end
 
   module Ui
