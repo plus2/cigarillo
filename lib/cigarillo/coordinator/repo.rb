@@ -59,7 +59,7 @@ module Cigarillo
                             :$set      => {:last_seen_at => now}
                            )
         else
-          collection.insert(
+          attrs = {
             :name  => name,
             :owner => owner,
 
@@ -68,7 +68,11 @@ module Cigarillo
             :reflog => [ {:ref => ref, :at => now} ],
 
             :ci    => {}
-          )
+          }
+
+          attrs[:local_url] = repo['local_url'] if repo['local_url']
+
+          collection.insert(attrs)
           repo = collection.find_one(:name => name, :owner => owner)
         end
 
@@ -93,7 +97,7 @@ module Cigarillo
       end
 
       def private_repo_url
-        "git@github.com:/#{owner}/#{name}.git"
+        local_url || "git@github.com:/#{owner}/#{name}.git"
       end
 
       def add_ref_to_ci(ref)
