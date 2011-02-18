@@ -5,7 +5,7 @@ require 'cigarillo'
 
 class MockProgress
   def info(tag, msg)
-    puts "#{tag}: #{msg}"
+    msg.tapp(tag)
   end
 end
 
@@ -39,5 +39,43 @@ puts "its a pty" if $stdout.tty?
 	env.ci!.environments!.test!.build_command = "ruby #{script_file}"
 	env.repo!.checkout = "/tmp"
 
+	Cigarillo::Integration::Runner.new.call(env)
+end
+
+
+eg 'runs structured' do
+	script_file = script <<-'EOS'
+#!/usr/bin/env ruby
+
+puts "its a pty" if $stdout.tty?
+
+100.times {|i|
+	$stdout.puts '{"out":"'+i.to_s+'"}'
+	$stderr.puts "err #{i}"
+}
+
+$stdout.flush
+
+$stdout.puts 'xx foo'
+$stdout.puts '{"xx":'+"\n"+' "foo"}'
+
+
+$stdout.flush
+
+100.times {|i|
+	$stdout.puts '{"out":"'+(i+100).to_s+'"}'
+	$stderr.puts "err #{i}"
+}
+	EOS
+	
+	env = AngryHash['progress' => MockProgress.new]
+
+	env.ci!.environments!.test = {
+    :build_command => "ruby #{script_file}",
+    :progress      => 'structured'
+  }
+	env.repo!.checkout = "/tmp"
+
+  puts "calling"
 	Cigarillo::Integration::Runner.new.call(env)
 end
