@@ -32,7 +32,8 @@ module Cigarillo
 
             progress.task("bundle") {
               # sh("bundle install --local --without no_ci --path=#{Cigarillo.workbench+'bundle'}", :cwd => repo.checkout).run if (repo.checkout+'Gemfile').exist?
-              sh("bundle install --deployment --without no_ci", :cwd => repo.checkout).run if (repo.checkout+'Gemfile').exist?
+              # sh("bundle install --deployment --without no_ci", :cwd => repo.checkout).run if (repo.checkout+'Gemfile').exist?
+              sh("bundle install --without no_ci", :cwd => repo.checkout).run if (repo.checkout+'Gemfile').exist?
             }
           end
 
