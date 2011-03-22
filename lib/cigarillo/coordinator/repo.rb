@@ -82,7 +82,7 @@ module Cigarillo
 
 
       def reflog
-        (self['reflog'] || [])
+        (self['reflog'] || []).reverse
       end
 
       def self.plain_ref(ref)
