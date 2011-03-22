@@ -45,9 +45,10 @@
         %th(scope="col") Push seen
         %th(scope="col") 
     %tbody
-      - (@repo.reflog || []).each do |log|
+      - @reflog.each do |log|
         %tr
           %td= log.ref
           %td= Time.at(log.at)
           %td
             %a(href="/repos/#{@repo._id}/ci/#{log.ref}") add to CI
+            %a(href="/repos/#{@repo._id}/force-build/#{log.ref}") force build

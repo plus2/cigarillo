@@ -45,9 +45,11 @@ module Cigarillo
 
         if params[:setup]
           @submenu_active = 'setup'
+          @reflog = @repo.reflog
           haml :repo_setup
         else
           @submenu_active = 'builds'
+          @builds = @repo.builds(:fields => %w{created_at ref result})
           haml :repo
         end
       end

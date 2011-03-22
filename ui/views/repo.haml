@@ -11,11 +11,16 @@
       %tr
         %th(scope="col") Built at
         %th(scope="col") Ref
-        %th(scope="col")
+        %th(scope="col" colspan=2)
     %tbody
-      - @repo.builds(:fields => %w{created_at ref}).each do |build|
+      - @builds.each do |build|
         %tr
           %td= build.created_at
           %td= build.ref
+          %td
+            - if build.result
+              = build.succeeded? ? 'succeeded' : 'failed'
+            - else
+              no result
           %td
             %a(href="/builds/#{build._id}") detail  

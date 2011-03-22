@@ -80,6 +80,11 @@ module Cigarillo
         repo
       end
 
+
+      def reflog
+        (self['reflog'] || [])
+      end
+
       def self.plain_ref(ref)
         ref.sub(%r{^refs/heads/},'')
       end
