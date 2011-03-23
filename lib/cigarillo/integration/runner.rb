@@ -11,6 +11,7 @@ module Cigarillo
             next :env => environment, :result => nil
           end
 
+          puts "running with #{options['progress']} progress"
           result = case options['progress']
                    when 'structured'
                      structured(env, environment, options)
