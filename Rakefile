@@ -1,7 +1,7 @@
 task :get_data do
   sh "ssh am-data2 /usr/local/mongodb/bin/mongodump -d plus2_ci"
   sh "rsync -avz am-data2:dump/ ./tmp/dump"
-  sh "mongorestore ./tmp/dump"
+  sh "mongorestore --drop ./tmp/dump"
 end
 
 task :coffee do
