@@ -24,6 +24,7 @@ module Cigarillo
     autoload :Db,       "cigarillo/utils/db"
     autoload :Result,       "cigarillo/utils/result"
     autoload :ANSI,     "cigarillo/utils/ansi"
+    autoload :StructuredProgress, "cigarillo/utils/structured_progress"
   end
 
   module Ui
