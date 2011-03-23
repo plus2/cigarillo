@@ -14,8 +14,7 @@ module Cigarillo
 
             build = Build.find(build_id)
 
-            # XXX report ref
-            {:exchange => 'plus2.messages', :app => 'cigarillo-coord', :msg => "[#{build.repo.path_name} #{build.ref}] build #{build.succeeded? ? "succeeded" : "failed"} http://ci.plus2dev.com/builds/#{build_id}"}
+            build.campfire_message( build.result_message )
           end
         else
           @igor.call(env)

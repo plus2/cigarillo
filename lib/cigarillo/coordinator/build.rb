@@ -58,6 +58,20 @@ module Cigarillo
         # the exchange is a bit hard-coded for now
         {:exchange => 'plus2.messages', :app => 'cigarillo-coord', :msg => "[#{repo.path_name} #{ref}] #{msg} http://ci.plus2dev.com/builds/#{_id}"}
       end
+
+      def result_message
+        msg = "build #{succeeded? ? "succeeded" : "failed"}"
+
+        if finished = integration_finished
+          msg += " in #{finished['duration']}s"
+        end
+
+        msg
+      end
+
+      def integration_finished
+        progress && progress.find {|p| p['tag'] == 'integration' && p['status'] == 'finished'}
+      end
         
       
     end
