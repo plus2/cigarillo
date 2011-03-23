@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: git://github.com/plustwo/igor.git
-  revision: c608d3bb02b73e0feece1567cadd779d1376981c
+  revision: 46df818150a6b75bbbf6aee4b831c55af2596c3d
   branch: rebirth_clean
   specs:
     igor (0.0.2)
@@ -28,20 +28,31 @@ GEM
   specs:
     amqp (0.6.7)
       eventmachine (>= 0.12.4)
-    angry_hash (0.3.2)
+    angry_hash (0.3.3)
     angry_shell (0.0.1)
     awesome_print (0.3.2)
     bson (1.2.1)
-    bson_ext (1.1.5)
+    bson_ext (1.2.0)
     bunny (0.6.0)
+    cgi_multipart_eof_fix (2.5.0)
+    daemons (1.1.0)
     eventmachine (0.12.10)
+    fastthread (1.0.7)
+    gem_plugin (0.2.3)
     haml (3.0.25)
     mongo (1.1.5)
       bson (>= 1.1.5)
+    mongrel (1.1.5)
+      cgi_multipart_eof_fix (>= 2.4)
+      daemons (>= 1.0.3)
+      fastthread (>= 1.0.1)
+      gem_plugin (>= 0.2.3)
     peace_love (0.2.2)
       angry_hash (~> 0.3.2)
       mongo (~> 1.1.5)
     rack (1.2.1)
+    shotgun (0.9)
+      rack (>= 1.0)
     sinatra (1.1.2)
       rack (~> 1.1)
       tilt (~> 1.2)
@@ -55,12 +66,14 @@ PLATFORMS
 DEPENDENCIES
   angry_shell (~> 0.0.1)
   awesome_print
-  bson_ext (= 1.1.5)
+  bson_ext (~> 1.2)
   bunny
   exemplor!
   haml
   igor (~> 0.0.2)!
   lachie-tapp!
+  mongrel
   peace_love (~> 0.2.2)
+  shotgun
   sinatra (~> 1.1.0)
   yajl-ruby
