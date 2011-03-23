@@ -7,7 +7,7 @@
       - if detail.is_a?(String)
         %li
           = status_icon('error')
-          = detail
+          &= detail
       - else
         %li
           = status_icon(detail.status)
