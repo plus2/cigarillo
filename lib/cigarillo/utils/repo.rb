@@ -97,8 +97,8 @@ module Cigarillo
 
 
       def info
-        
         short_sha,author,date,msg = git("log -1 --pretty=format:\"%h\t%an\t%at\t%B\"").to_s.split("\t") 
+
         {
           'sha'    => short_sha,
           'author' => author,

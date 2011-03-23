@@ -69,6 +69,17 @@ module Cigarillo
         msg
       end
 
+      def repo_info_message
+        if info = repo_info
+          date = Time.at(info['date'].to_i)
+          "[#{info['sha']}] #{info['msg']} - #{info['author']} on #{date}"
+        end
+      end
+
+      def repo_info
+        progress && progress.find {|p| p['tag'] == 'build-commit-info'}
+      end
+
       def integration_finished
         progress && progress.find {|p| p['tag'] == 'integration' && p['status'] == 'finished'}
       end
