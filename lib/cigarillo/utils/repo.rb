@@ -95,6 +95,21 @@ module Cigarillo
         @repos ||= (Cigarillo.workbench+'repos').tap {|p| p.mkpath}
       end
 
+
+      def info
+        
+        short_sha,author,date,msg = git("log -1 --pretty=format:\"%h\t%an\t%at\t%B\"").to_s.split("\t") 
+        {
+          'sha'    => short_sha,
+          'author' => author,
+          'date'   => date,
+          'msg'    => msg
+        }
+      rescue
+        {}
+      end
+
+
       # git helper
       def git(*cmd)
         opts = Hash === cmd.last ? cmd.pop : {}
