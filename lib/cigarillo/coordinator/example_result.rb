@@ -14,7 +14,7 @@ module Cigarillo
           file = self.file['path']
         end
 
-        file ||= ''
+        file ||= self.file || ''
         file.sub(/\.eg\.rb$/,'')
       end
     end
