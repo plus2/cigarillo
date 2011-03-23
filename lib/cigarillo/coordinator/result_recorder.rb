@@ -14,11 +14,13 @@ module Cigarillo
 
             build = Build.find(build_id)
 
-            build.campfire_message( build.result_message )
+            [ build.campfire_message( build.result_message ) ].tap do |messages|
 
-            if repo_info = build.repo_info_message
-              build.campfire_message( repo_info )
+              if repo_info = build.repo_info_message
+                messages << build.campfire_message( repo_info )
+              end
             end
+
           end
         else
           @igor.call(env)
