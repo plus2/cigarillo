@@ -96,8 +96,8 @@ module Cigarillo
       end
 
 
-      def info
-        short_sha,author,date,msg = git("log -1 --pretty=format:\"%h\t%an\t%at\t%B\"").to_s.split("\t") 
+      def checkout_info
+        short_sha,author,date,msg = git("log -1 --pretty=format:\"%h\t%an\t%at\t%B\"", :cwd => checkout).to_s.split("\t") 
 
         {
           'sha'    => short_sha,

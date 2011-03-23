@@ -7,7 +7,7 @@ eg 'repo info' do
 	r = Cigarillo::Utils::Repo.new(config)
 
 	here = Pathname('../../..').expand_path(__FILE__)
-	r.instance_eval { @repo = here.to_s}
+	r.instance_eval { @checkout = here.to_s}
 
-	r.info
+	r.checkout_info
 end
