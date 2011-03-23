@@ -65,14 +65,11 @@ module Cigarillo
       def structured(env, environment, options)
         progress = Cigarillo::Utils::StructuredProgress.new(env['progress'])
 
-        rubyopt = "-I#{Cigarillo.root+'lib'} -rcigarillo"
-
         cmd = {
           :cmd => "bundle exec #{options['build_command']}",
           :cwd => env['runner.cwd'],
           :stream => true,
-          :environment => {'RAILS_ENV' => environment, 'RACK_ENV' => environment, 'RUBYOPT' => rubyopt, 'BUNDLE_GEMFILE' => nil, 'GEM_HOME' => nil, 'GEM_PATH' => nil},
-          :without_cleaning_bundler => true
+          :environment => {'RAILS_ENV' => environment, 'RACK_ENV' => environment}
         }
 
         run_with_progress(cmd, progress)
