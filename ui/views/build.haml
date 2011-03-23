@@ -11,6 +11,8 @@
     %span.ref ref #{@build.ref}
     |
     %span.id id #{@build._id}
+    |
+    %a(href="/repos/#{@build.repo._id}/force-build/#{@build.ref}") force build
 
 
 %h3 status

@@ -73,7 +73,7 @@ module Cigarillo
           haml :repo_setup
         else
           @submenu_active = 'builds'
-          @builds = @repo.builds(:fields => %w{created_at ref result})
+          @builds = @repo.builds(:fields => %w{repo_id created_at ref result})
           haml :repo
         end
       end
