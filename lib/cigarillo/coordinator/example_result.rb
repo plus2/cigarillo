@@ -10,6 +10,11 @@ module Cigarillo
       end
 
       def name
+        if file.is_a?(Hash)
+          file = self.file['path']
+        end
+
+        file ||= ''
         file.sub(/\.eg\.rb$/,'')
       end
     end
