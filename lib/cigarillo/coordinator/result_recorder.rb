@@ -15,6 +15,10 @@ module Cigarillo
             build = Build.find(build_id)
 
             build.campfire_message( build.result_message )
+
+            if repo_info = build.repo_info_message
+              build.campfire_message( repo_info )
+            end
           end
         else
           @igor.call(env)
