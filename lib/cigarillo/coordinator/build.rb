@@ -70,7 +70,8 @@ module Cigarillo
       end
 
       def repo_info_message
-        if info = repo_info
+        rinfo = repo_info
+        if rinfo && (info = rinfo[:msg])
           date = Time.at(info['date'].to_i)
           "[#{info['sha']}] #{info['msg']} - #{info['author']} on #{date}"
         end
