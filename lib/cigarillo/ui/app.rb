@@ -32,6 +32,23 @@ module Cigarillo
 
           haml :_result, :locals => {:result => result}
         end
+
+        def status_icon(kind)
+          icon = case kind.to_s
+          when 'error'
+            '☠'
+          when 'failure'
+            '✕'
+          when 'success'
+            '✓'
+          when /info/
+            '☞'
+          else
+            kind.to_s
+          end
+
+          "<span class='#{kind}'>#{icon}</span>"
+        end
       end
 
       def remove_current_repo_from_menu

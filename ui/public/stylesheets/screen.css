@@ -220,5 +220,15 @@ body {
           font-family: sans-serif; }
           body #canvas #content table tbody tr td {
             padding: 10px 5px; }
+            body #canvas #content table tbody tr td pre.raw.hidden {
+              display: none; }
+            body #canvas #content table tbody tr td .error {
+              color: red; }
+            body #canvas #content table tbody tr td .failure {
+              color: red; }
+            body #canvas #content table tbody tr td .info {
+              color: blue; }
+            body #canvas #content table tbody tr td .success {
+              color: green; }
           body #canvas #content table tbody tr:nth-child(even) td {
             background: #fbf3ec; }

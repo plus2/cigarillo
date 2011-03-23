@@ -182,6 +182,23 @@ body {
           tr {
             td {
               padding: 10px 5px;
+
+              pre.raw.hidden {
+                display: none;
+              }
+
+              .error {
+                color: red;
+              }
+              .failure {
+                color: red;
+              }
+              .info {
+                color: blue;
+              }
+              .success {
+                color: green;
+              }
             }
             &:nth-child(even) {
               td {background: #fbf3ec}
