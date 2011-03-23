@@ -8,3 +8,4 @@ deploy/yes_master_dna.json
 tmp/restart.txt
 .sass-cache
 .p2mob_test.rb
+tmp
