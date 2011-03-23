@@ -13,6 +13,7 @@ module Cigarillo
 
         @submenu_active = {}
       end
+
       helpers do
         def active(key)
           if @submenu_active && @submenu_active == key
@@ -24,6 +25,12 @@ module Cigarillo
 
         def ansi_esc(string)
           Cigarillo::Utils::ANSI.new(string).to_html
+        end
+
+        def render_result(result)
+          result = result.dup.extend(Cigarillo::Coordinator::ExampleResult)
+
+          haml :_result, :locals => {:result => result}
         end
       end
 

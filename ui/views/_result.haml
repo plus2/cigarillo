@@ -1,0 +1,5 @@
+- if result.result?
+  %h2
+    #{result.name} - #{result.succeeded? ? 'succeeded' : 'failed'} - in #{result.duration}s
+
+%pre= find_and_preserve(ansi_esc result.awesome_inspect)

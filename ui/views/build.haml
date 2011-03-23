@@ -45,7 +45,10 @@
                   =line.tag
                   = '/'+line.status if line.status
                 %td
-                  %pre= find_and_preserve(ansi_esc line.msg.awesome_inspect) #ansi_esc line.msg)
+                  - if line.msg.is_a?(Hash)
+                    = render_result(line.msg)
+                  - else
+                    %pre= find_and_preserve(ansi_esc line.msg)
 
               - if line.status == 'finished'
                 %tr
