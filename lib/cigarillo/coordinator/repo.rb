@@ -81,6 +81,21 @@ module Cigarillo
       end
 
 
+			def self.extract_commit_message(payload)
+				if payload.present?
+					id = payload['after']
+					commit = payload['commits'].try(:find) {|c| c['id'] == id}
+
+					commit['message'] if commit
+				end
+			end
+
+			def self.wip_commit?(payload)
+				msg = extract_commit_message(payload)
+				!!( msg && msg[/\[wip\]/i] )
+			end
+
+
       def reflog
         (self['reflog'] || []).reverse
       end
