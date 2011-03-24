@@ -36,12 +36,17 @@ module Cigarillo
           begin
             @parser.parse(line)
           rescue Yajl::ParseError
+            add_line(line)
             puts "ook #{$!.class}: #{$!}"
             setup_parser!
           end
         end
       end
 
+
+      def add_line(line)
+        @progress.info :out, line
+      end
 
       def add_obj(obj)
         @progress.info :out, obj
