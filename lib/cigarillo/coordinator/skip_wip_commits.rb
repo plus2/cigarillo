@@ -9,7 +9,8 @@ module Cigarillo
         if Repo.wip_commit?(env['igor.payload'])
           puts "skipping [WIP] commit"
           puts "message: #{Repo.extract_commit_message(env['igor.payload'])}"
-          env['igor.payload'].tapp
+
+          nil
         else
           @igor.call(env)
         end
