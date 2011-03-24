@@ -70,7 +70,7 @@ module Cigarillo
             :ci    => {}
           }
 
-          attrs[:local_url] = repo['local_url'] if repo['local_url']
+          attrs[:local_url] = repo['local_url'] if repo && repo['local_url']
 
           collection.insert(attrs)
           repo = collection.find_one(:name => name, :owner => owner)
