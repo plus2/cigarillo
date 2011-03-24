@@ -8,7 +8,10 @@ use Igor::PayloadParsers::JSON
 
 
 use Cigarillo::Coordinator::ProgressRecorder
+# XXX record when a worker claims a build use Cigarillo::Coordinator::BindingRecorder 
 use Cigarillo::Coordinator::ResultRecorder
+
+use Cigarillo::Coordinator::SkipWipCommits
 
 run Cigarillo::Coordinator::Igor.new
 
