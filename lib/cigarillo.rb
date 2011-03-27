@@ -30,6 +30,7 @@ module Cigarillo
     autoload :Db                , "cigarillo/utils/db"
     autoload :Result            , "cigarillo/utils/result"
     autoload :ANSI              , "cigarillo/utils/ansi"
+    autoload :Words             , "cigarillo/utils/words"
     autoload :StructuredProgress, "cigarillo/utils/structured_progress"
   end
 
