@@ -7,6 +7,8 @@ PeaceLove.connect(:database => 'ci_eg')
 PeaceLove.connection.drop_database('ci_eg')
 
 R = Cigarillo::Coordinator::Repo
+B = Cigarillo::Coordinator::Build
+
 eg.helpers do
   def record_repo(extras={})
     repo = AngryHash['name' => 'foobar', 'owner' => {'name' => 'foocorp'}, 'ref' => "refs/heads/master"].deep_merge(extras)
@@ -64,4 +66,49 @@ eg 'wip commit' do
 
 	show_wip_commit[ 'yep yep wip blah' ]
 	show_wip_commit[ '[wippet] blah' ]
+end
+
+
+eg 'summary' do
+  repo_id = R.collection.insert(:owner => 'plustwo', :name => 'thing')
+
+	add_build = lambda {|ref, status, created_at, summary|
+		B.collection.insert(:repo_id => repo_id, :ref => ref, :result => {:status => status}, :created_at => created_at, :summary => summary)
+	}
+
+	base_time = Time.now.to_i
+
+	add_build['master', 'failed', base_time, {
+		"duration" => 0.83,
+		"commit_message" => "Yup Yup",
+		"sha" => "0xdeadbeef",
+		"author" => "Bob Jones"
+	}]
+
+	add_build['master', 'ok', base_time, {
+		"duration" => 0.83,
+		"commit_message" => "Yup Yup",
+		"sha" => "0xdeadbeef",
+		"author" => "Job Bones"
+	}]
+
+	add_build['knuckles', 'failed', base_time+5, {
+		"duration" => 0.83,
+		"commit_message" => "Yup Yup",
+		"sha" => "0xdeadbeef",
+		"author" => "Bob Jones"
+	}]
+
+	# old commit
+	add_build['knuckles', 'ok', base_time-(8 * 24*3600), {
+		"duration" => 0.83,
+		"commit_message" => "Yup Yup knuckles old",
+		"sha" => "0xdeadbeef",
+		"author" => "Bob Jones",
+	}]
+
+	repo = R.find(repo_id)
+	repo.update_summary!
+
+	R.find(repo_id)
 end
