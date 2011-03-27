@@ -92,7 +92,7 @@ module Cigarillo
 
       def after_build_messages
         [ campfire_message_with_prefix( result_message ) ].tap do |messages|
-          (repo.summary || []).each {|summary|
+          (repo.summary || []).tapp.compact.each {|summary|
             messages << campfire_message(repo_summary_line(summary))
           }
         end
@@ -107,7 +107,7 @@ module Cigarillo
 
       def campfire_message(msg)
         # the exchange is a bit hard-coded for now
-        {:exchange => 'plus2.messages', :app => 'cigarillo-coord', :msg => msg}
+        {:exchange => 'plus2.messages', :app => 'cig-coord', :msg => msg}
       end
 
 
@@ -123,14 +123,12 @@ module Cigarillo
 
 
       def repo_summary_line(summary)
-        summary = summary.dup
+        summary['result']               = (summary['result'] == 'ok') ? 'Pushed' : 'BROKEN'
+        summary['trunc_commit_message'] = summary['commit_message'][0..80] if summary['commit_message']
 
-        summary['result']         = (summary['result'] == 'ok') ? 'Pushed' : 'BROKEN'
-        summary['commit_message'] = summary['commit_message'][0..80]
+        time_ago = Cigarillo::Utils::Words.distance_of_time_in_words( Time.at(summary['created_at']), Time.now )
 
-        time_ago = Cigarillo::Utils::Words.distance_of_time_in_words(Time.at(summary['created_at']), Time.now)
-
-        "%s by %s in (%s@%s) %s [ci %4.1fs, #{time_ago} ago]" % summary.values_at(*%w[result author ref sha commit_message duration])
+        "%s by %s in (%s@%s) %s [ci %4.1fs, #{time_ago} ago]" % summary.values_at(*%w[result author ref sha trunc_commit_message duration])
       end
 
 

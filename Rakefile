@@ -15,6 +15,7 @@ end
 task :db do
 	$LOAD_PATH << File.expand_path("../lib",__FILE__)
 	require 'environment'
+	require 'tapp'
 	require 'cigarillo'
 	require 'peace_love'
 	PeaceLove.connect(:database => 'plus2_ci')
