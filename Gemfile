@@ -9,7 +9,7 @@ gem 'bunny'
 gem 'igor', '~>0.0.2', :git => "git://github.com/plustwo/igor.git", :branch => "rebirth_clean"
 
 gem "angry_shell", '~>0.0.1'
-gem 'bson_ext', '~> 1.2'
+gem 'bson_ext', '~> 1.2.0'
 gem "peace_love", '~>0.2.2'
 
 gem 'yajl-ruby'

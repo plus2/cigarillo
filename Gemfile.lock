@@ -31,8 +31,8 @@ GEM
     angry_hash (0.3.3)
     angry_shell (0.0.1)
     awesome_print (0.3.2)
-    bson (1.2.1)
-    bson_ext (1.2.0)
+    bson (1.2.4)
+    bson_ext (1.2.4)
     bunny (0.6.0)
     cgi_multipart_eof_fix (2.5.0)
     daemons (1.1.0)
@@ -40,16 +40,17 @@ GEM
     fastthread (1.0.7)
     gem_plugin (0.2.3)
     haml (3.0.25)
-    mongo (1.1.5)
-      bson (>= 1.1.5)
+    mongo (1.2.4)
+      bson (>= 1.2.4)
     mongrel (1.1.5)
       cgi_multipart_eof_fix (>= 2.4)
       daemons (>= 1.0.3)
       fastthread (>= 1.0.1)
       gem_plugin (>= 0.2.3)
-    peace_love (0.2.2)
+    peace_love (0.2.3)
       angry_hash (~> 0.3.2)
-      mongo (~> 1.1.5)
+      bson_ext (~> 1.2.0)
+      mongo (~> 1.2.0)
     rack (1.2.1)
     shotgun (0.9)
       rack (>= 1.0)
@@ -66,7 +67,7 @@ PLATFORMS
 DEPENDENCIES
   angry_shell (~> 0.0.1)
   awesome_print
-  bson_ext (~> 1.2)
+  bson_ext (~> 1.2.0)
   bunny
   exemplor!
   haml
