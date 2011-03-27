@@ -3,6 +3,19 @@
     %a(href="/") repos
     &rsaquo;
     #{@repo.path_name}
+
+%section#summary
+  %table
+    %tbody
+      - @summary.each do |summary|
+        %tr
+          %td= build_status_icon(summary.result)
+          %td= summary.result
+          %td= summary.ref
+          %td= summary.author
+          %td= summary.commit_message
+          %td= Time.at(summary.created_at)
+
 %section#repo
 
   %h3 Builds
@@ -15,7 +28,7 @@
     %tbody
       - @builds.each do |build|
         %tr
-          %td= build.created_at
+          %td= build.created_at_t
           %td= build.ref
           %td
             - if build.result

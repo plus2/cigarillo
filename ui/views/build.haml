@@ -32,6 +32,10 @@
     - else
       The build hasn't reported any status yet.
 
+  %li
+    %h3 summary
+    %pre&= @build.summary.pretty_inspect
+
   %li.log
     %h3 log
     - if @build.progress && !@build.progress.empty?

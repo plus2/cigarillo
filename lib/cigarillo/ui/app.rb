@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'pp'
 
 module Cigarillo
   module Ui
@@ -33,6 +34,20 @@ module Cigarillo
           haml :_result, :locals => {:result => result}
         end
 
+				def build_status_icon(kind)
+          icon = case kind.to_s
+          when 'ok'
+            '✓'
+          when /^fail/
+            '✕'
+          else
+            kind.to_s
+          end
+
+          "<span class='#{kind}'>#{icon}</span>"
+				end
+
+
         def status_icon(kind)
           icon = case kind.to_s
           when 'error'
@@ -66,6 +81,8 @@ module Cigarillo
         @repo = Cigarillo::Coordinator::Repo.find(id)
 
         remove_current_repo_from_menu
+
+				@summary = @repo.summary.sort_by {|s| -s['created_at']}
 
         if params[:setup]
           @submenu_active = 'setup'
