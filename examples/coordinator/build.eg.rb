@@ -33,3 +33,26 @@ eg 'result message' do
 
   Show(b.campfire_message(b.result_message))
 end
+
+
+eg.helpers do
+	def progress(tag,msg,extra={})
+		{ 'tag' => tag, 'msg' => msg }.merge(extra)
+	end
+end
+
+
+eg 'record result' do
+  repo_id = R.collection.insert(:owner => 'plustwo', :name => 'thing')
+  build_id = B.collection.insert(
+		:ref => 'master', :repo_id => repo_id, :result => {:status => 'ok'},
+		:progress => [
+			progress('integration'      , '', 'status' => 'finished', 'duration' => 0.83),
+			progress('build-commit-info', 'author' => 'Bob Jones', 'sha' => '0xdeadbeef', 'date' => Time.now.to_i, 'msg' => 'Yup Yup')
+		]
+	)
+
+	B.record_result( build_id, { "details"  =>  { "builds"  =>  [ { "env"  =>  "test", "success"  =>  true } ] }, "status"  =>  "ok", "cigarillo-kind"  =>  "result" } )
+
+	B.find(build_id)
+end
