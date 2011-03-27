@@ -1,0 +1,26 @@
+- if @build.result? && summary = @build.summary
+  .summary{:class => @build.succeeded? ? 'ok' : 'broken'}
+    %h1
+      = @build.succeeded? ? '✓' : '✕' 
+      = @build.ref
+      = @build.succeeded? ? 'ok' : 'broken'
+    @ #{summary.sha}
+    by #{summary.author}
+    #{Cigarillo::Utils::Words.distance_of_time_in_words( Time.at(@build.created_at), Time.now )} ago
+    in #{"%.1f" % summary.duration}s
+    \-
+    = summary.commit_message
+
+%table
+  %tbody
+    - @repo.summary.each do |summary|
+      %tr{:class => summary.result == 'ok' ? 'ok' : 'broken'}
+        %td.marked= summary.result == 'ok' ? '✓' : '✕' 
+        %td #{summary.ref}
+        %td @ #{summary.sha}
+        %td.marked= summary.result == 'ok' ? 'Pushed' : 'Broken'
+        %td by #{summary.author}
+        %td #{Cigarillo::Utils::Words.distance_of_time_in_words( Time.at(summary.created_at), Time.now )} ago
+        %td in #{"%.1f" % summary.duration}s
+        %td= summary.commit_message
+

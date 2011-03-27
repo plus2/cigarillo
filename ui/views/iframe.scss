@@ -1,0 +1,33 @@
+$broken: #fd706d;
+$ok: #affab2;
+
+body {
+  font-size: .8em;
+  font-family: sans-serif;
+
+  .summary {
+    &.ok {
+      background: $ok;
+    }
+    &.broken {
+      background: $broken;
+    }
+    h1 {
+      margin: 0;
+    }
+  }
+
+  table {
+    tr.ok td.marked {
+      background: $ok;
+    }
+
+    tr.broken td.marked {
+      background: $broken;
+    }
+
+    td {
+      border-bottom: 1px dotted #a9a9a9;
+    }
+  }
+}

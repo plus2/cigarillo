@@ -1,0 +1,15 @@
+body {
+  font-size: .8em;
+  font-family: sans-serif; }
+  body .summary.ok {
+    background: #affab2; }
+  body .summary.broken {
+    background: #fd706d; }
+  body .summary h1 {
+    margin: 0; }
+  body table tr.ok td.marked {
+    background: #affab2; }
+  body table tr.broken td.marked {
+    background: #fd706d; }
+  body table td {
+    border-bottom: 1px dotted #a9a9a9; }

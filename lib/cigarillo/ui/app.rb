@@ -34,7 +34,7 @@ module Cigarillo
           haml :_result, :locals => {:result => result}
         end
 
-				def build_status_icon(kind)
+        def build_status_icon(kind)
           icon = case kind.to_s
           when 'ok'
             '✓'
@@ -45,7 +45,7 @@ module Cigarillo
           end
 
           "<span class='#{kind}'>#{icon}</span>"
-				end
+        end
 
 
         def status_icon(kind)
@@ -82,7 +82,7 @@ module Cigarillo
 
         remove_current_repo_from_menu
 
-				@summary = @repo.summary.try(:sort_by) {|s| -s['created_at']} || []
+        @summary = @repo.summary.try(:sort_by) {|s| -s['created_at']} || []
 
         if params[:setup]
           @submenu_active = 'setup'
@@ -104,6 +104,15 @@ module Cigarillo
         @submenu_active = 'builds'
 
         haml :build
+      end
+
+      get '/build-summary/:id' do |id|
+        @css = %W{build}
+        @build = Cigarillo::Coordinator::Build.find(id)
+
+        @repo  = @build.repo
+
+        haml :build_summary, :layout => :iframe
       end
 
       def redir_setup(repo)
