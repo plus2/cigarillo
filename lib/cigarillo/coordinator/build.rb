@@ -4,7 +4,7 @@ module Cigarillo
   module Coordinator
     module Build
       include PeaceLove::Doc
-			extend PeaceLove::OidHelper
+      extend PeaceLove::OidHelper
 
       mongo_collection 'builds'
 
@@ -12,7 +12,7 @@ module Cigarillo
         ref ||= repo.current_ref
         id = collection.insert :created_at => Time.now.to_i, :repo_id => repo._id, :sha => repo.after, :ref => ref # XXX sha? current_ref? ref?
 
-				repo.add_build_id!(id)
+        repo.add_build_id!(id)
 
         collection.ensure_index([['repo_id', Mongo::ASCENDING]])
         collection.ensure_index([['created_at', Mongo::DESCENDING]])
@@ -29,10 +29,10 @@ module Cigarillo
       def self.record_result(build_id,result)
         collection.update({:_id => oid(build_id)}, :$set => {:result => result})
 
-				build = find(build_id)
+        build = find(build_id)
 
-				build.summarise!
-				build.repo.update_summary!
+        build.summarise!
+        build.repo.update_summary!
       end
 
 
@@ -53,23 +53,23 @@ module Cigarillo
       end
 
 
-			###############
-			#  accessors  #
-			###############
+      ###############
+      #  accessors  #
+      ###############
 
       def repo
         @repo ||= Cigarillo::Coordinator::Repo.find(repo_id)
       end
 
-			def created_at_t
-				@created_at_t ||= Time.at(created_at)
-			end
+      def created_at_t
+        @created_at_t ||= Time.at(created_at)
+      end
 
 
 
-			#############
-			#  results  #
-			#############
+      #############
+      #  results  #
+      #############
 
       def succeeded?
         result.status == 'ok'
@@ -80,9 +80,9 @@ module Cigarillo
       end
 
 
-			###############
-			#  messaging  #
-			###############
+      ###############
+      #  messaging  #
+      ###############
 
       def ci_message(ref_to_build=nil)
         ref_to_build ||= ref
@@ -90,10 +90,24 @@ module Cigarillo
       end
 
 
-      def campfire_message(msg,ref_to_build=nil)
+      def after_build_messages
+        [ campfire_message_with_prefix( result_message ) ].tap do |messages|
+          (repo.summary || []).each {|summary|
+            messages << campfire_message(repo_summary_line(summary))
+          }
+        end
+      end
+
+
+      def campfire_message_with_prefix(msg, ref_to_build=nil)
         ref_to_build ||= ref
+        campfire_message("[#{repo.path_name} #{ref}] #{msg} http://ci.plus2dev.com/builds/#{_id}")
+      end
+
+
+      def campfire_message(msg)
         # the exchange is a bit hard-coded for now
-        {:exchange => 'plus2.messages', :app => 'cigarillo-coord', :msg => "[#{repo.path_name} #{ref}] #{msg} http://ci.plus2dev.com/builds/#{_id}"}
+        {:exchange => 'plus2.messages', :app => 'cigarillo-coord', :msg => msg}
       end
 
 
@@ -108,6 +122,18 @@ module Cigarillo
       end
 
 
+      def repo_summary_line(summary)
+        summary = summary.dup
+
+        summary['result']         = (summary['result'] == 'ok') ? 'Pushed' : 'BROKEN'
+        summary['commit_message'] = summary['commit_message'][0..80]
+
+        time_ago = Cigarillo::Utils::Words.distance_of_time_in_words(Time.at(summary['created_at']), Time.now)
+
+        "%s by %s in (%s@%s) %s [ci %4.1fs, #{time_ago} ago]" % summary.values_at(*%w[result author ref sha commit_message duration])
+      end
+
+
       def repo_info_message
         rinfo = repo_info
         if rinfo && (info = rinfo[:msg])
@@ -117,27 +143,27 @@ module Cigarillo
       end
 
 
-			#############
-			#  summary  #
-			#############
+      #############
+      #  summary  #
+      #############
 
-			def summarise!
-				summary = {}
+      def summarise!
+        summary = {}
 
-				if finished = integration_finished
-					summary['duration'] = finished['duration']
-				end
+        if finished = integration_finished
+          summary['duration'] = finished['duration']
+        end
 
-				if info = repo_info
-					info = info['msg'].dup
+        if info = repo_info
+          info = info['msg'].dup
 
-					info['commit_message'] = info.delete('msg')
+          info['commit_message'] = info.delete('msg')
 
-					summary.update(info)
-				end
+          summary.update(info)
+        end
 
-				__collection.update({:_id => _id}, :$set => {:summary => summary})
-			end
+        __collection.update({:_id => _id}, :$set => {:summary => summary})
+      end
 
 
       def repo_info

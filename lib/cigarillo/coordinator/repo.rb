@@ -87,64 +87,66 @@ module Cigarillo
       end
 
 
-			def add_build_id!(build_id)
+      def add_build_id!(build_id)
         __collection.update({:_id => _id}, :$push => {:builds => oid(build_id)})
-			end
+      end
 
 
-			#############
-			#  summary  #
-			#############
-			def update_summary!
-				earliest = Time.now.to_i - (7 * 24 * 3600)
+      #############
+      #  summary  #
+      #############
+      def update_summary!
+        earliest = Time.now.to_i - (7 * 24 * 3600)
 
-				leaderboard = Build.collection.group(
-					:key => :ref, :cond => {:repo_id => _id, :created_at => {:$gte => earliest}},
-					:initial => {},
-					:reduce => 'function(doc, out) {
-						if(!out.created_at || doc.created_at > out.created_at) {
-							out.created_at = doc.created_at
+        leaderboard = Build.collection.group(
+          :key => :ref, :cond => {:repo_id => _id, :created_at => {:$gte => earliest}},
+          :initial => {},
+          :reduce => 'function(doc, out) {
+            if(!out.created_at || doc.created_at > out.created_at) {
+              out.created_at = doc.created_at
 
-							if(doc.result && doc.result.status)
-								out.result     = doc.result.status
-							
-							var s;
-							if(s = doc.summary) {
-								out.duration       = s.duration
-								out.commit_message = s.commit_message
-								out.sha            = s.sha
-								out.author         = s.author
-							}
-						}
-					}'
-				)
+              if(doc.result && doc.result.status)
+                out.result     = doc.result.status
+              
+              var s;
+              if(s = doc.summary) {
+                out.duration       = s.duration
+                out.commit_message = s.commit_message
+                out.sha            = s.sha
+                out.author         = s.author
+              }
+            }
+          }'
+        )
 
-				__collection.update({:_id => _id}, :$set => {:summary => leaderboard.to_a})
-			end
+        leaderboard = leaderboard.to_a.sort_by {|l| l['created_at']}
 
-
-			############################
-			#  commit message helpers  #
-			############################
-
-			def self.extract_commit_message(payload)
-				if payload.present?
-					id = payload['after']
-					commit = payload['commits'].try(:find) {|c| c['id'] == id}
-
-					commit['message'] if commit
-				end
-			end
-
-			def self.wip_commit?(payload)
-				msg = extract_commit_message(payload)
-				!!( msg && msg[/\[wip\]/i] )
-			end
+        __collection.update({:_id => _id}, :$set => {:summary => leaderboard})
+      end
 
 
-			###############
-			#  accessors  #
-			###############
+      ############################
+      #  commit message helpers  #
+      ############################
+
+      def self.extract_commit_message(payload)
+        if payload.present?
+          id = payload['after']
+          commit = payload['commits'].try(:find) {|c| c['id'] == id}
+
+          commit['message'] if commit
+        end
+      end
+
+      def self.wip_commit?(payload)
+        msg = extract_commit_message(payload)
+        !!( msg && msg[/\[wip\]/i] )
+      end
+
+
+      ###############
+      #  accessors  #
+      ###############
 
       def reflog
         (self['reflog'] || []).reverse
