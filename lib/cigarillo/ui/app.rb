@@ -82,7 +82,7 @@ module Cigarillo
 
         remove_current_repo_from_menu
 
-				@summary = @repo.summary.sort_by {|s| -s['created_at']}
+				@summary = @repo.summary.try(:sort_by) {|s| -s['created_at']} || []
 
         if params[:setup]
           @submenu_active = 'setup'
