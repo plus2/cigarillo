@@ -119,7 +119,7 @@ module Cigarillo
           }'
         )
 
-        leaderboard = leaderboard.to_a.reject {|lb| lb['author'].blank?}.sort_by {|l| l['created_at']}
+        leaderboard = leaderboard.to_a.reject {|lb| lb['author'].blank?}.sort_by {|l| -l['created_at']}
 
         __collection.update({:_id => _id}, :$set => {:summary => leaderboard})
       end
