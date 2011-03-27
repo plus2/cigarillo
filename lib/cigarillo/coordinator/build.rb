@@ -91,11 +91,7 @@ module Cigarillo
 
 
       def after_build_messages
-        [ campfire_message_with_prefix( result_message ) ].tap do |messages|
-          (repo.summary || []).tapp.compact.each {|summary|
-            messages << campfire_message(repo_summary_line(summary))
-          }
-        end
+        [ campfire_message_with_prefix( result_message ) ]
       end
 
 
@@ -119,16 +115,6 @@ module Cigarillo
         end
 
         msg
-      end
-
-
-      def repo_summary_line(summary)
-        summary['result']               = (summary['result'] == 'ok') ? 'Pushed' : 'BROKEN'
-        summary['trunc_commit_message'] = summary['commit_message'][0..80] if summary['commit_message']
-
-        time_ago = Cigarillo::Utils::Words.distance_of_time_in_words( Time.at(summary['created_at']), Time.now )
-
-        "%s by %s in (%s@%s) %s [ci %4.1fs, #{time_ago} ago]" % summary.values_at(*%w[result author ref sha trunc_commit_message duration])
       end
 
 
