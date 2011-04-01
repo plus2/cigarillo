@@ -47,7 +47,7 @@ module Cigarillo
       def self.record_repo(repo)
         name  = repo['name']
         owner = repo['owner']['name']
-        ref = plain_ref(repo['ref'])
+        ref   = plain_ref(repo['ref'])
 
         repo = collection.find_one(:name => name, :owner => owner)
         
@@ -154,7 +154,7 @@ module Cigarillo
 
 
       def self.plain_ref(ref)
-        ref.sub(%r{^refs/heads/},'')
+        ref.sub(%r{^refs/(heads|tags)/},'')
       end
 
 
