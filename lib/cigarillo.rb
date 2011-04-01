@@ -32,6 +32,7 @@ module Cigarillo
     autoload :ANSI              , "cigarillo/utils/ansi"
     autoload :Words             , "cigarillo/utils/words"
     autoload :StructuredProgress, "cigarillo/utils/structured_progress"
+    autoload :CheckoutCleaner, "cigarillo/utils/checkout_cleaner"
   end
 
   module Ui
