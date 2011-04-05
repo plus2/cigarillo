@@ -14,6 +14,8 @@ gem "peace_love", '~>0.2.2'
 
 gem 'yajl-ruby'
 
+gem 'SystemTimer'
+
 group :ui do
   gem 'sinatra', '~> 1.1.0'
   gem 'haml'

@@ -6,28 +6,29 @@ begin
   # ruby 1.9+ and rbx.
   if !defined?(RUBY_ENGINE) || (RUBY_ENGINE == 'ruby' && RUBY_VERSION < '1.9.0')
     require 'system_timer'
-    MemCacheTimer = SystemTimer
+    TimeoutNazi = SystemTimer
   else
     require 'timeout'
-    MemCacheTimer = Timeout
+    TimeoutNazi = Timeout
   end
 rescue LoadError => e
   require 'timeout'
-  MemCacheTimer = Timeout
+  TimeoutNazi = Timeout
 end
 
 module Cigarillo
   module Integration
     class TimeNazi
-      def initialize(igor)
+      def initialize(igor, timeout=20*60)
         @igor = igor
+        @timeout = timeout
       end
 
       def call(env)
-        # XXX set hard timeout on execution
-
         begin
-          @igor.call(env)
+          TimeoutNazi.timeout(@timeout) do
+            @igor.call(env)
+          end
         rescue Object
           puts "[#{$!.class}] #{$!}"
           $!.backtrace.each {|line| puts "  #{line}"}
