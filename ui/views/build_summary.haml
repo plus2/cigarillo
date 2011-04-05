@@ -21,6 +21,6 @@
         %td.marked= summary.result == 'ok' ? 'Pushed' : 'Broken'
         %td by #{summary.author}
         %td #{Cigarillo::Utils::Words.distance_of_time_in_words( Time.at(summary.created_at), Time.now )} ago
-        %td in #{"%.1f" % summary.duration}s
+        %td in #{"%.1f" % (summary.duration || 0)}s
         %td= summary.commit_message
 
