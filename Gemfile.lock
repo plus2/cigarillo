@@ -26,6 +26,7 @@ GIT
 GEM
   remote: http://rubygems.org/
   specs:
+    SystemTimer (1.2.3)
     amqp (0.6.7)
       eventmachine (>= 0.12.4)
     angry_hash (0.3.3)
@@ -65,6 +66,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  SystemTimer
   angry_shell (~> 0.0.1)
   awesome_print
   bson_ext (~> 1.2.0)
